@@ -1,0 +1,31 @@
+@import url('../../../App.module.less');
+@import url('./input.module.less');
+// @import url('./textarea.module.less');
+
+.shellForm {
+   margin: 0 auto;
+   padding: 30px 40px;
+   width: 400px;
+   border-radius: 10px;
+   background-color: @detailsBackgroundcolorThree;
+   color: @generalBackground;
+}
+
+.headline {
+   font: 600 25px @generalfont;
+   color: @colortext;
+   padding: 20px 10px;
+   background-color: @detailsBackgroundcolorOne;
+   border-radius: 10px;
+   text-align: center;
+}
+
+.form {
+   margin: 0 auto;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   column-gap: 25px;
+   row-gap: 15px;
+   padding: 30px 20px;
+   width: auto;
+}

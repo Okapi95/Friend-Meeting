@@ -1,0 +1,25 @@
+@import url('../../../App.module.less');
+
+.container {
+   grid-column: span 2;
+   border-bottom: solid 2px @detailsBackgroundcolorOne;
+   width: auto;
+   padding: 10px 0;
+
+}
+
+.container textarea {
+   font-family: @generalfont;
+   color: @generalBackground;
+   padding: 10px;
+   vertical-align: middle;
+   border: 2px solid #cccccc;
+   border-radius: 5px;
+   width: -webkit-fill-available;
+   width: -moz-available;
+}
+
+textarea:focus {
+   border: solid 2px @detailsBackgroundcolorOne;
+   outline: none;
+}

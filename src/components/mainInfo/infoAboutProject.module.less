@@ -1,0 +1,41 @@
+@import url("/src/App.module.less");
+
+@marginleftparth: 200px;
+@fontlessparth: italic 400 25px @generalfont;
+
+.aboutProject {
+   border: solid 2px green;
+   padding: 100px 40px 200px;
+   display: grid;
+   grid-template-columns: 1fr;
+   row-gap: 30px;
+   background-color: transparent;
+   height: fit-content;
+}
+
+.aboutProject__mostparth {
+   border: @border;
+   font: 400 50px 'Sofia Sans Semi Condensed';
+   color: @detailsColortexttwo;
+   letter-spacing: .1rem;
+   margin-left: @marginleftparth;
+   max-width: 690px;
+}
+
+.aboutProject__lessparthone {
+   border: @border;
+   font: @fontlessparth;
+   color: @detailsColortextone;
+   margin-left: @marginleftparth*3.5;
+   line-height: 1.5;
+   max-width: 500px;
+}
+
+.aboutProject__lessparthtwo {
+   border: @border;
+   font: @fontlessparth;
+   color: @detailsColortextone;
+   margin-left: @marginleftparth*2.5;
+   line-height: 1.5;
+   max-width: 700px;
+}
