@@ -9,22 +9,28 @@
    max-width: fit-content;
    background-color: transparent;
    color: @colortext;
-   text-decoration: none;
 }
 
-.nameAndLogo__smallLogo {
+.nameAndLogo:hover,
+.nameAndLogo:active,
+.nameAndLogo:focus {
+   text-decoration: none;
+   color: @colortext;
+   outline: none;
+}
 
+.smallLogo {
    width: 50px;
 }
 
-.nameAndLogo__bigLogo {
+.bigLogo {
    width: 100px;
 }
 
-.nameAndLogo__bigName {
+.bigName {
    font: 600 40px @generalfont;
 }
 
-.nameAndLogo__smallName {
-   font: 600 20px 'Montserrat';
+.smallName {
+   font: 600 20px @generalfont;
 }

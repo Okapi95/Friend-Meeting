@@ -7,11 +7,11 @@ function CompanyNameAndLogo(props) {
   let imgSizeClass;
   let nameSizeClass;
   if (props.isSmall) {
-    imgSizeClass = classes.nameAndLogo__smallLogo;
-    nameSizeClass = classes.nameAndLogo__smallName;
+    imgSizeClass = classes.smallLogo;
+    nameSizeClass = classes.smallName;
   } else {
-    imgSizeClass = classes.nameAndLogo__bigLogo;
-    nameSizeClass = classes.nameAndLogo__bigName;
+    imgSizeClass = classes.bigLogo;
+    nameSizeClass = classes.bigName;
   }
 
   return (

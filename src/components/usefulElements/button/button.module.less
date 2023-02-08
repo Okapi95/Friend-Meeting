@@ -14,11 +14,22 @@
 
 .loginbarButton:hover {
    background: #f895ad;
+   text-decoration: none;
+   color: @colortext;
 }
 
 .loginbarButton:active {
    background: @detailsBackgroundcolorOne;
    box-shadow: 0 3px @shadowcolor inset;
+   text-decoration: none;
+   color: @colortext;
+   outline: none;
+}
+
+.loginbarButton:focus {
+   text-decoration: none;
+   color: @colortext;
+   outline: none;
 }
 
 .lightButton {
@@ -27,7 +38,11 @@
    box-shadow: 0 -2px @shadowcolor inset;
 }
 
+.lightButton:focus {
+   color: @detailsBackgroundcolorTwo;
+}
+
 .richButton {
-   background-color: @detailsBackgroundcolorOne ;
+   background-color: @detailsBackgroundcolorOne;
    box-shadow: 0 -2px @shadowcolor inset;
 }

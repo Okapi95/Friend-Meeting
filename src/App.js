@@ -5,6 +5,7 @@ import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RoomPage from "./components/roomPage/roomPage";
+import CreatedRoomMessage from "./components/roomPage/createdRoomMessage/createdRoomMessage";
 
 function App() {
   return (
