@@ -3,6 +3,7 @@ import Button from "../usefulElements/button/button";
 import classes from "./loginPage.module.less";
 import Form from "../usefulElements/form/form";
 import Input from "../usefulElements/form/input";
+import NotificationTemplate from "../usefulElements/notificationTemplate/notificationTemplate";
 
 function LoginPage() {
   return (
@@ -38,12 +39,26 @@ function LoginPage() {
             autofocus={false}
           />
         </Form>
-        <div className={classes.buttonShell}>
+        <div className={classes.buttonShellCheckin}>
           <Button
             link=""
             styleButton={classes.richButton}
             buttonName="Зарегистрироваться"
           />
+        </div>
+
+        <div className={classes.inviteToPersonalPage}>
+          <NotificationTemplate
+            fontsize="28"
+            text="Вы зарегистрировались! Теперь у вас есть доступ в Личный кабинет"
+          />
+          <div className={classes.buttonShellPersonal}>
+            <Button
+              buttonName="Личный кабинет"
+              link=""
+              styleButton={classes.richButton}
+            />
+          </div>
         </div>
       </div>
     </div>

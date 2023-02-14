@@ -4,7 +4,7 @@ import classes from "./roomPage.module.less";
 import Form from "../usefulElements/form/form";
 import Input from "../usefulElements/form/input";
 import Textarea from "../usefulElements/form/textarea";
-import CreatedRoomMessage from "./createdRoomMessage/createdRoomMessage";
+import InviteLinks from "./inviteLinks/inviteLinks";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
@@ -16,23 +16,28 @@ function RoomPage(props) {
     <div className={classes.roomPage}>
       <div className={classes.containerForm}>
         <Form headline="1. Заполните форму встречи">
-          <Input
+          <Textarea
+            placeHolder="Название встречи"
+            name="meeting-name"
+            autofocus={true}
+            rows={1}
+          />
+          {/* <Input
             name="meetingname"
             type="text"
             placeHolder="Назовите встречу"
             required={true}
             autofocus={true}
-          />
-          <Input
-            name="email"
-            type="email"
-            placeHolder="Email"
-            required={true}
-            autofocus={false}
-          />
+          /> */}
           <Textarea
             placeHolder="Опишите вашу встречу"
             name="meeting-description"
+            rows={1}
+          />
+          <Textarea
+            placeHolder="Сюда нужно вставить ссылку на Zoom-конференцию"
+            name="meeting-zoomlink"
+            rows={2}
           />
         </Form>
 
@@ -67,7 +72,7 @@ function RoomPage(props) {
           styleButton={classes.richButton}
         />
       </div>
-      <CreatedRoomMessage />
+      <InviteLinks />
     </div>
   );
 }
