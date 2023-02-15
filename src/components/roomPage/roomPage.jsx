@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./roomPage.module.less";
+import NotificationTemplate from "../usefulElements/notificationTemplate/notificationTemplate";
 import Form from "../usefulElements/form/form";
 import Input from "../usefulElements/form/input";
 import Textarea from "../usefulElements/form/textarea";
@@ -14,6 +15,9 @@ import "./customDateRangePicker.module.less";
 function RoomPage(props) {
   return (
     <div className={classes.roomPage}>
+      <div className={classes.headlineRoomPage}>
+        <NotificationTemplate fontsize="45" text="Создание комнаты" />
+      </div>
       <div className={classes.containerForm}>
         <Form headline="1. Заполните форму встречи">
           <Textarea
@@ -67,12 +71,11 @@ function RoomPage(props) {
       </div>
       <div className={classes.buttonShell}>
         <Button
-          buttonName="Создать комнату"
-          link=""
+          buttonName="3. Создать комнату"
+          link="/created-room"
           styleButton={classes.richButton}
         />
       </div>
-      <InviteLinks />
     </div>
   );
 }

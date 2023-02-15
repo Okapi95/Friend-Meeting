@@ -8,14 +8,16 @@ function InviteLinks(props) {
     "Вы создали комнату :) Теперь вы можете скопировать ссылку-приглашение и разослать её вашим друзьям в любом удобном мессенджере.";
 
   return (
-    <div className={classes.inviteLinks}>
-      <NotificationTemplate text={text} />
-      <div className={classes.buttonShell}>
-        <Button
-          buttonName="Копировать ссылку-приглашение"
-          link=""
-          styleButton={classes.richButton}
-        />
+    <div className={classes.shell}>
+      <div className={classes.inviteLinks}>
+        <NotificationTemplate text={text} />
+        <div className={classes.buttonShell}>
+          <Button
+            buttonName="Копировать ссылку-приглашение"
+            link=""
+            styleButton={classes.richButton}
+          />
+        </div>
       </div>
     </div>
   );

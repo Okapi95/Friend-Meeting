@@ -3,7 +3,8 @@ import Button from "../usefulElements/button/button";
 import classes from "./loginPage.module.less";
 import Form from "../usefulElements/form/form";
 import Input from "../usefulElements/form/input";
-import NotificationTemplate from "../usefulElements/notificationTemplate/notificationTemplate";
+import AfterRegistration from "./afterRegistration/afterRegistration";
+import { Outlet } from "react-router-dom";
 
 function LoginPage() {
   return (
@@ -41,24 +42,10 @@ function LoginPage() {
         </Form>
         <div className={classes.buttonShellCheckin}>
           <Button
-            link=""
+            link="/user-has-registered"
             styleButton={classes.richButton}
             buttonName="Зарегистрироваться"
           />
-        </div>
-
-        <div className={classes.inviteToPersonalPage}>
-          <NotificationTemplate
-            fontsize="28"
-            text="Вы зарегистрировались! Теперь у вас есть доступ в Личный кабинет"
-          />
-          <div className={classes.buttonShellPersonal}>
-            <Button
-              buttonName="Личный кабинет"
-              link=""
-              styleButton={classes.richButton}
-            />
-          </div>
         </div>
       </div>
     </div>

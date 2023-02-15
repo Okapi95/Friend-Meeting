@@ -8,7 +8,7 @@ function PersonalPage() {
   return (
     <div className={classes.personalPage}>
       <div className={classes.headlinePersonalPage}>
-        <NotificationTemplate fontsize="50" text="Личный кабинет" />
+        <NotificationTemplate fontsize="45" text="Личный кабинет" />
       </div>
       <div className={classes.shellPersonalPage}>
         <div className={classes.title}>Мои встречи</div>
@@ -23,7 +23,7 @@ function PersonalPage() {
 
       <div className={classes.buttonShell}>
         <Button
-          link=""
+          link="/create-room"
           styleButton={classes.lightButton}
           buttonName="Создать комнату"
         />

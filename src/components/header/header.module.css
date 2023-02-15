@@ -1,4 +1,5 @@
 .header {
+   height: 18vh;
    background-color: transparent;
    display: flex;
    justify-content: space-between;
