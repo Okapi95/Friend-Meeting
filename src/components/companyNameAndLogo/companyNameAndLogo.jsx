@@ -17,7 +17,7 @@ function CompanyNameAndLogo(props) {
   return (
     <Link className={classes.nameAndLogo} to="">
       <img className={imgSizeClass} src={svg} alt="logo" />
-      <div className={nameSizeClass}>Meeting room</div>
+      <div className={nameSizeClass}>Meet(Room)</div>
     </Link>
   );
 }
