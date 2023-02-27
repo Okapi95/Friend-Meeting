@@ -3,14 +3,11 @@ import classes from "./header.module.css";
 import CompanyNameAndLogo from "../companyNameAndLogo/companyNameAndLogo.jsx";
 import Loginbar from "./loginbar/loginbar";
 
-function Header() {
-  // здесь пишу состояние
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
+function Header(props) {
   return (
     <header className={classes.header}>
       <CompanyNameAndLogo isSmall={false} />
-      <Loginbar isLoggedIn={isLoggedIn} />
+      <Loginbar isLoggedIn={props.isLoggedIn1} />
     </header>
   );
 }

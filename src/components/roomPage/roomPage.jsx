@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./roomPage.module.less";
 import NotificationTemplate from "../usefulElements/notificationTemplate/notificationTemplate";
@@ -12,7 +12,19 @@ import { DateRangePicker } from "rsuite";
 import "rsuite/styles/index.less";
 import "./customDateRangePicker.module.less";
 
-function RoomPage(props) {
+function RoomPage() {
+  const [valueMeetingName, setValueMeetingName] = useState("");
+  const [valueMeetingDescription, setValueMeetingDescription] = useState("");
+  const [valueMeetingZoomlink, setValueMeetingZoomlink] = useState("");
+  const [valueСhosenDate, setValueСhosenDate] = useState([
+    new Date("2017-02-01 01:00:00"),
+    new Date("2017-02-02 14:00:00"),
+  ]);
+  const [valueСhosenTime, setValueСhosenTime] = useState([
+    new Date("2017-02-01 01:00:00"),
+    new Date("2017-02-02 14:00:00"),
+  ]);
+
   return (
     <div className={classes.roomPage}>
       <div className={classes.headlineRoomPage}>
@@ -21,43 +33,55 @@ function RoomPage(props) {
       <div className={classes.containerForm}>
         <Form headline="1. Заполните форму встречи">
           <Textarea
+            value={valueMeetingName}
+            onChange={(event) => {
+              setValueMeetingName(event.target.value);
+            }}
             placeHolder="Название встречи"
             name="meeting-name"
             autofocus={true}
             rows={1}
           />
-          {/* <Input
-            name="meetingname"
-            type="text"
-            placeHolder="Назовите встречу"
-            required={true}
-            autofocus={true}
-          /> */}
           <Textarea
+            value={valueMeetingDescription}
+            onChange={(event) => {
+              setValueMeetingDescription(event.target.value);
+            }}
             placeHolder="Опишите вашу встречу"
             name="meeting-description"
             rows={1}
           />
           <Textarea
+            value={valueMeetingZoomlink}
+            onChange={(event) => {
+              setValueMeetingZoomlink(event.target.value);
+            }}
             placeHolder="Сюда нужно вставить ссылку на Zoom-конференцию"
             name="meeting-zoomlink"
             rows={2}
           />
+          {valueMeetingName} <br />
+          {valueMeetingDescription} <br />
+          {valueMeetingZoomlink} <br />
         </Form>
 
         <Form headline="2. Выберите дату и время">
           <p>Выберите удобную дату(даты)</p>
           <DateRangePicker
+            value={valueСhosenDate}
+            onChange={setValueСhosenDate}
             placeholder="Календарь"
             format="yyyy-MM-dd"
             defaultCalendarValue={[
-              new Date("2022-02-01 00:00:00"),
-              new Date("2022-05-01 23:59:59"),
+              new Date("2022-02-01"),
+              new Date("2022-05-01"),
             ]}
             placement="leftStart"
           />
           <p>Выберите подходящий интервал времени</p>
           <DateRangePicker
+            value={valueСhosenTime}
+            onChange={setValueСhosenTime}
             placeholder="Время"
             format="HH:mm"
             ranges={[]}
@@ -67,6 +91,7 @@ function RoomPage(props) {
             ]}
             placement="leftStart"
           />
+          {/* {valueСhosenDate[0].toString()}-{valueСhosenDate[1].toString()} */}
         </Form>
       </div>
       <div className={classes.buttonShell}>

@@ -5,6 +5,8 @@ function Input(props) {
   return (
     <div className={classes.container}>
       <input
+        value={props.value}
+        onChange={props.onChange}
         name={props.name}
         type={props.type}
         placeHolder={props.placeHolder}

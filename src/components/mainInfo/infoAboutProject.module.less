@@ -1,19 +1,19 @@
 @import url("/src/App.module.less");
+@import url("../usefulElements/button/button.module.less");
 
 @marginleftparth: 200px;
 @fontlessparth: italic 400 25px @generalfont;
 
 .aboutProject {
-   padding: 80px 40px 100px;
+   padding: 60px 40px 100px;
    display: grid;
    grid-template-columns: 1fr;
-   row-gap: 30px;
+   row-gap: 20px;
    background-color: transparent;
    height: fit-content;
 }
 
 .aboutProject__mostparth {
-   border: @border;
    font: 400 50px @secondaryfont;
    color: @detailsColortexttwo;
    letter-spacing: .1rem;
@@ -22,7 +22,6 @@
 }
 
 .aboutProject__lessparthone {
-   border: @border;
    font: @fontlessparth;
    color: @detailsColortextone;
    margin-left: @marginleftparth*3.5;

@@ -1,7 +1,8 @@
 import React from "react";
+import Button from "../usefulElements/button/button";
 import classes from "./infoAboutProject.module.less";
 
-function InfoAboutProject() {
+function InfoAboutProject(props) {
   return (
     <div className={classes.aboutProject}>
       <div className={classes.aboutProject__mostparth}>
@@ -14,6 +15,15 @@ function InfoAboutProject() {
       <div className={classes.aboutProject__lessparthtwo}>
         Создайте комнату встречи и выберите удобное для всех время. Затем
         отправьте друзьям ссылку-приглашение... Готово!
+      </div>
+      <div>
+        {props.isLoggedIn && (
+          <Button
+            styleButton={classes.lightButton}
+            buttonName="Вернуться в личный кабинет"
+            link="/personal-page"
+          />
+        )}
       </div>
     </div>
   );

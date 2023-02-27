@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./loginPage.module.less";
 import Form from "../usefulElements/form/form";
 import Input from "../usefulElements/form/input";
-import AfterRegistration from "./afterRegistration/afterRegistration";
-import { Outlet } from "react-router-dom";
 
 function LoginPage() {
+  const [registerName, setRegisterName] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerPasswordRepeat, setRegisterPasswordRepeat] = useState("");
+
   return (
     <div>
       <div className={classes.loginPage}>
         <Form headline="Регистрация">
           <Input
+            value={registerName}
+            onChange={(event) => {
+              setRegisterName(event.target.value);
+            }}
             name="name"
             type="text"
             placeHolder="Ваше имя"
@@ -19,6 +26,10 @@ function LoginPage() {
             autofocus={true}
           />
           <Input
+            value={registerEmail}
+            onChange={(event) => {
+              setRegisterEmail(event.target.value);
+            }}
             name="email"
             type="email"
             placeHolder="Ваш Email"
@@ -26,13 +37,21 @@ function LoginPage() {
             autofocus={false}
           />
           <Input
-            name="passwordRepeat"
+            value={registerPassword}
+            onChange={(event) => {
+              setRegisterPassword(event.target.value);
+            }}
+            name="password"
             type="password"
             placeHolder="Введите пароль"
             required={true}
             autofocus={false}
           />
           <Input
+            onChange={(event) => {
+              setRegisterPasswordRepeat(event.target.value);
+            }}
+            value={registerPasswordRepeat}
             name="passwordRepeat"
             type="password"
             placeHolder="Повторите пароль"

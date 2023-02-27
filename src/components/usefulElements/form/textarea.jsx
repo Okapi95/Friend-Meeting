@@ -8,6 +8,8 @@ function Textarea(props) {
         maxLength={350}
         name={props.name}
         placeHolder={props.placeHolder}
+        value={props.value}
+        onChange={props.onChange}
         autoFocus={props.autoFocus}
         rows={props.rows}
         wrap="hard"
