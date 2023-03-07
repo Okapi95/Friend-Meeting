@@ -5,7 +5,7 @@ import Footer from "./footer/footer";
 function Layout(props) {
   return (
     <>
-      <Header isLoggedIn1={props.isLoggedIn2} />
+      <Header isLoggedIn1={props.isLoggedIn} />
       <Outlet />
       <Footer />
     </>

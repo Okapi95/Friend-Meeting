@@ -8,6 +8,7 @@ function Button(props) {
     <Link
       to={props.link}
       className={classnames(classes.loginbarButton, props.styleButton)}
+      onClick={props.onClick}
     >
       {props.buttonName}
     </Link>

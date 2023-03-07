@@ -8,10 +8,10 @@ function Input(props) {
         value={props.value}
         onChange={props.onChange}
         name={props.name}
+        onBlur={props.onBlur}
         type={props.type}
         placeHolder={props.placeHolder}
         required={props.required}
-        autoFocus={props.autofocus}
       />
     </div>
   );

@@ -3,9 +3,7 @@ import Button from "../usefulElements/button/button";
 import classes from "./roomPage.module.less";
 import NotificationTemplate from "../usefulElements/notificationTemplate/notificationTemplate";
 import Form from "../usefulElements/form/form";
-import Input from "../usefulElements/form/input";
 import Textarea from "../usefulElements/form/textarea";
-import InviteLinks from "./inviteLinks/inviteLinks";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
@@ -13,14 +11,15 @@ import "rsuite/styles/index.less";
 import "./customDateRangePicker.module.less";
 
 function RoomPage() {
-  const [valueMeetingName, setValueMeetingName] = useState("");
-  const [valueMeetingDescription, setValueMeetingDescription] = useState("");
-  const [valueMeetingZoomlink, setValueMeetingZoomlink] = useState("");
-  const [valueСhosenDate, setValueСhosenDate] = useState([
+  const [meetingName, setMeetingName] = useState("");
+  const [meetingDescription, setMeetingDescription] = useState("");
+  const [meetingZoomlink, setMeetingZoomlink] = useState("");
+
+  const [chosenDate, setСhosenDate] = useState([
     new Date("2017-02-01 01:00:00"),
     new Date("2017-02-02 14:00:00"),
   ]);
-  const [valueСhosenTime, setValueСhosenTime] = useState([
+  const [chosenTime, setСhosenTime] = useState([
     new Date("2017-02-01 01:00:00"),
     new Date("2017-02-02 14:00:00"),
   ]);
@@ -32,10 +31,13 @@ function RoomPage() {
       </div>
       <div className={classes.containerForm}>
         <Form headline="1. Заполните форму встречи">
+          {!meetingName && (
+            <div>поле нейм не должно быть пустым! недоделанный код.</div>
+          )}
           <Textarea
-            value={valueMeetingName}
+            value={meetingName}
             onChange={(event) => {
-              setValueMeetingName(event.target.value);
+              setMeetingName(event.target.value);
             }}
             placeHolder="Название встречи"
             name="meeting-name"
@@ -43,33 +45,30 @@ function RoomPage() {
             rows={1}
           />
           <Textarea
-            value={valueMeetingDescription}
+            value={meetingDescription}
             onChange={(event) => {
-              setValueMeetingDescription(event.target.value);
+              setMeetingDescription(event.target.value);
             }}
             placeHolder="Опишите вашу встречу"
             name="meeting-description"
             rows={1}
           />
           <Textarea
-            value={valueMeetingZoomlink}
+            value={meetingZoomlink}
             onChange={(event) => {
-              setValueMeetingZoomlink(event.target.value);
+              setMeetingZoomlink(event.target.value);
             }}
             placeHolder="Сюда нужно вставить ссылку на Zoom-конференцию"
             name="meeting-zoomlink"
             rows={2}
           />
-          {valueMeetingName} <br />
-          {valueMeetingDescription} <br />
-          {valueMeetingZoomlink} <br />
         </Form>
 
         <Form headline="2. Выберите дату и время">
           <p>Выберите удобную дату(даты)</p>
           <DateRangePicker
-            value={valueСhosenDate}
-            onChange={setValueСhosenDate}
+            value={chosenDate}
+            onChange={setСhosenDate}
             placeholder="Календарь"
             format="yyyy-MM-dd"
             defaultCalendarValue={[
@@ -80,8 +79,8 @@ function RoomPage() {
           />
           <p>Выберите подходящий интервал времени</p>
           <DateRangePicker
-            value={valueСhosenTime}
-            onChange={setValueСhosenTime}
+            value={chosenTime}
+            onChange={setСhosenTime}
             placeholder="Время"
             format="HH:mm"
             ranges={[]}

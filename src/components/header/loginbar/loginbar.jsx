@@ -6,7 +6,11 @@ function Loginbar({ isLoggedIn }) {
   let button = [];
   if (isLoggedIn) {
     button = [
-      <Button styleButton={classes.lightButton} buttonName="Выход" link="/" />,
+      <Button
+        styleButton={classes.lightButton}
+        buttonName="Выход"
+        link="/exit-page"
+      />,
     ];
   } else {
     button = [
