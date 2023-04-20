@@ -1,6 +1,6 @@
 @import url('/src/App.module.less');
 
-.loginbarButton {
+.button {
    font: 600 18px @generalfont;
    cursor: pointer;
    color: @colortext;
@@ -8,46 +8,34 @@
    border: 0;
    border-radius: 8px;
    padding: 10px 20px;
-   // outline: none;
-   // text-decoration: none;
+
+   &:hover {
+      background: #f895ad;
+      color: @colortext;
+   }
+
+   &:active {
+      background: @detailsBackgroundcolorOne;
+      box-shadow: 0 3px @shadowcolor inset;
+      color: @colortext;
+   }
+
+   &:focus {
+      color: @colortext;
+   }
 }
 
-.loginbarButton:hover {
-   background: #f895ad;
-   text-decoration: none;
-   color: @colortext;
-}
-
-.loginbarButton:active {
-   background: @detailsBackgroundcolorOne;
-   box-shadow: 0 3px @shadowcolor inset;
-   text-decoration: none;
-   color: @colortext;
-   outline: none;
-}
-
-.loginbarButton:focus {
-   text-decoration: none;
-   color: @colortext;
-   outline: none;
-}
-
-.lightButton {
+.button_theme_light {
    color: @detailsBackgroundcolorTwo;
    background-color: @detailsBackgroundcolorThree;
    box-shadow: 0 -2px @shadowcolor inset;
+
+   &:focus {
+      color: @detailsBackgroundcolorTwo;
+   }
 }
 
-.lightButton:focus {
-   color: @detailsBackgroundcolorTwo;
-}
-
-.richButton {
+.button_theme_rich {
    background-color: @detailsBackgroundcolorOne;
    box-shadow: 0 -2px @shadowcolor inset;
-}
-
-.linkStyle {
-   text-decoration: none;
-   outline: none;
 }

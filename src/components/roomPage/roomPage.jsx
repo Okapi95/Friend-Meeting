@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./roomPage.module.less";
-import NotificationTemplate from "../usefulElements/notificationTemplate/notificationTemplate";
-import Form from "../usefulElements/form/form";
-import Textarea from "../usefulElements/form/textarea";
+import axios from "axios";
+import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
+import Form from "../usefulElements/usefulElements__form/usefulElements__form";
+import Textarea from "../usefulElements/usefulElements__form/textarea";
+import { toRequiredFormatDate } from "./functions";
+import { Navigate } from "react-router-dom";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
@@ -15,24 +18,41 @@ function RoomPage() {
   const [meetingDescription, setMeetingDescription] = useState("");
   const [meetingZoomlink, setMeetingZoomlink] = useState("");
 
-  const [chosenDate, setСhosenDate] = useState([
-    new Date("2017-02-01 01:00:00"),
-    new Date("2017-02-02 14:00:00"),
-  ]);
-  const [chosenTime, setСhosenTime] = useState([
-    new Date("2017-02-01 01:00:00"),
-    new Date("2017-02-02 14:00:00"),
-  ]);
+  const [chosenDate, setСhosenDate] = useState([new Date(), new Date()]);
+  const [chosenTime, setСhosenTime] = useState([new Date(), new Date()]);
+  const [isRoomCreated, setIsRoomCreated] = useState(false);
+
+  const sendCreateMeetingRequest = () => {
+    axios
+      .post("https://meetroom.speakatalka.com/api/meetings", {
+        name: meetingName,
+        description: meetingDescription,
+        meetingLink: meetingZoomlink,
+        dates: toRequiredFormatDate(
+          chosenDate[0],
+          chosenDate[1],
+          chosenTime[0],
+          chosenTime[1]
+        ),
+      })
+      .then((response) => {
+        console.log(response);
+        setIsRoomCreated(true);
+      })
+      .catch((error) => {
+        console.log("ошибка");
+      });
+  };
 
   return (
     <div className={classes.roomPage}>
-      <div className={classes.headlineRoomPage}>
+      <div className={classes.roomPage__headline}>
         <NotificationTemplate fontsize="45" text="Создание комнаты" />
       </div>
-      <div className={classes.containerForm}>
+      <div className={classes.roomPage__container}>
         <Form headline="1. Заполните форму встречи">
           {!meetingName && (
-            <div>поле нейм не должно быть пустым! недоделанный код.</div>
+            <div>поле нейм не должно быть пустым! дописать код.</div>
           )}
           <Textarea
             value={meetingName}
@@ -65,16 +85,13 @@ function RoomPage() {
         </Form>
 
         <Form headline="2. Выберите дату и время">
-          <p>Выберите удобную дату(даты)</p>
+          <p>Выберите подходящий интервал дат</p>
           <DateRangePicker
             value={chosenDate}
             onChange={setСhosenDate}
             placeholder="Календарь"
             format="yyyy-MM-dd"
-            defaultCalendarValue={[
-              new Date("2022-02-01"),
-              new Date("2022-05-01"),
-            ]}
+            defaultCalendarValue={[new Date(), new Date()]}
             placement="leftStart"
           />
           <p>Выберите подходящий интервал времени</p>
@@ -90,15 +107,16 @@ function RoomPage() {
             ]}
             placement="leftStart"
           />
-          {/* {valueСhosenDate[0].toString()}-{valueСhosenDate[1].toString()} */}
         </Form>
       </div>
-      <div className={classes.buttonShell}>
+      <div className={classes.roomPage__buttonShell}>
         <Button
-          buttonName="3. Создать комнату"
-          link="/created-room"
-          styleButton={classes.richButton}
-        />
+          styleButton={classes.button_theme_rich}
+          onClick={() => sendCreateMeetingRequest()}
+        >
+          3. Создать комнату
+        </Button>
+        {isRoomCreated && <Navigate to="/created-room" replace={true} />}
       </div>
     </div>
   );

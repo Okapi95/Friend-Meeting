@@ -1,12 +1,40 @@
 import React, { useEffect, useState } from "react";
 import classes from "./entryPage.module.less";
-import Form from "../usefulElements/form/form";
+import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Button from "../usefulElements/button/button";
-import Input from "../usefulElements/form/input";
+import Input from "../usefulElements/usefulElements__form/input";
+import svghideeye from "../../images/iconhideeye.svg";
+import svgopeneye from "../../images/iconopeneye.svg";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 
-function EntryPage({ changeAuth }) {
+function EntryPage({
+  changeAuth,
+  isLoggedIn,
+  isVisiblePassword,
+  setIsVisible,
+}) {
+  // const [isVisible, setIsVisible] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorDate, setErrorDate] = useState(false);
+
+  const sendLoginRequest = () => {
+    axios
+      .post("https://meetroom.speakatalka.com/api/login", {
+        username: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response);
+        changeAuth(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorDate(true);
+      });
+  };
 
   // возможно этот код пригодиться
   // const blurHandler = (event) => {
@@ -38,26 +66,40 @@ function EntryPage({ changeAuth }) {
             name="email"
             // onBlur={(event) => blurHandler(event)}
             type="email"
-            placeHolder="Или введите Email"
+            placeHolder="Введите Email"
             required={true}
           />
-          <Input
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            name="password"
-            // onBlur={(event) => blurHandler(event)}
-            type="password"
-            placeHolder="Введите пароль"
-            required={true}
-          />
+          <div className={classes.entryPage__password}>
+            <Input
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              name="password"
+              // onBlur={(event) => blurHandler(event)}
+              type={isVisiblePassword ? "text" : "password"}
+              placeHolder="Введите пароль"
+              required={true}
+            />
+            <div
+              className={classes.entryPage__iconVisiblePassword}
+              onClick={() => setIsVisible(!isVisiblePassword)}
+            >
+              {isVisiblePassword ? (
+                <img src={svgopeneye} />
+              ) : (
+                <img src={svghideeye} />
+              )}
+            </div>
+          </div>
+          {errorDate && <div>Неправильно введен email или пароль</div>}
         </Form>
-        <div className={classes.buttonShellEntry}>
+        <div className={classes.entryPage__buttonShell}>
           <Button
-            link="/personal-page"
-            styleButton={classes.richButton}
-            buttonName="Войти в личный кабинет"
-            onClick={() => changeAuth()}
-          />
+            styleButton={classes.button_theme_rich}
+            onClick={() => sendLoginRequest()}
+          >
+            Войти в личный кабинет
+          </Button>
+          {isLoggedIn && <Navigate to={"/personal-page"} />}
         </div>
       </div>
     </div>

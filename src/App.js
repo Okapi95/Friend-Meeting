@@ -1,21 +1,40 @@
 import React, { useState } from "react";
 import classes from "./App.module.less";
+import axios from "axios";
 import ErrorPage from "./components/errorPage/errorPage";
 import LoginPage from "./components/login-page/loginPage";
 import InfoAboutProject from "./components/mainInfo/infoAboutProject";
-import AfterRegistration from "./components/login-page/afterRegistration/afterRegistration";
+import AfterRegistration from "./components/login-page/login-page__afterRegistration/login-page__afterRegistration";
 import RoomPage from "./components/roomPage/roomPage";
 import PersonalPage from "./components/personalPage/personalPage";
-import InviteLinks from "./components/roomPage/inviteLinks/inviteLinks";
+import InviteLinks from "./components/roomPage/roomPage__inviteLinks/roomPage__inviteLinks";
 import EntryPage from "./components/entryPage/entryPage";
 import ExitPage from "./components/exitPage/exitPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 
 function App() {
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [isVisiblePassword, setIsVisible] = useState(false);
+  // const toggleVisiblePassword = (visibleStatus) => {
+  //   setIsVisible(visibleStatus);
+  // };
 
-  const changeAuth = () => setAuthenticated(!isAuthenticated);
+  const [isAuthenticated, setAuthenticated] = useState(false);
+  const changeAuthenticationStatus = () => {
+    axios
+      .get("https://meetroom.speakatalka.com/api/auth")
+      .then((response) => {
+        console.log(
+          `ответ пришёл положительный, пользователь аутентифицирован ---> ${response}`
+        );
+        setAuthenticated(true);
+      })
+      .catch((error) => console.log(`выскочила какая-то ошибка ---> ${error}`));
+  };
+  changeAuthenticationStatus();
+
+  const changeAuth = (authenticationStatus) =>
+    setAuthenticated(authenticationStatus);
 
   return (
     <BrowserRouter>
@@ -28,7 +47,13 @@ function App() {
             />
             <Route
               path="registration"
-              element={<LoginPage changeAuth={changeAuth} />}
+              element={
+                <LoginPage
+                  changeAuth={changeAuth}
+                  isVisiblePassword={isVisiblePassword}
+                  setIsVisible={setIsVisible}
+                />
+              }
             />
             <Route path="user-has-registered" element={<AfterRegistration />} />
             <Route path="personal-page" element={<PersonalPage />} />
@@ -36,7 +61,14 @@ function App() {
             <Route path="created-room" element={<InviteLinks />} />
             <Route
               path="entry"
-              element={<EntryPage changeAuth={changeAuth} />}
+              element={
+                <EntryPage
+                  changeAuth={changeAuth}
+                  isLoggedIn={isAuthenticated}
+                  isVisiblePassword={isVisiblePassword}
+                  setIsVisible={setIsVisible}
+                />
+              }
             />
             <Route
               path="exit-page"

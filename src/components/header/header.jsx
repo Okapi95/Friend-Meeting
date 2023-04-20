@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./header.module.css";
 import CompanyNameAndLogo from "../companyNameAndLogo/companyNameAndLogo.jsx";
-import Loginbar from "./loginbar/loginbar";
+import Loginbar from "./__loginbar/header__loginbar";
 
 function Header(props) {
   return (

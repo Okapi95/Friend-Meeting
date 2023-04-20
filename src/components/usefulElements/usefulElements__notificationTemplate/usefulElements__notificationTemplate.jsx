@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./notificationTemplate.module.less";
+import classes from "./usefulElements__notificationTemplate.module.less";
 
 function NotificationTemplate(props) {
   return (

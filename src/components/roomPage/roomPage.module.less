@@ -1,31 +1,28 @@
 @import url("/src/App.module.less");
-@import url('../usefulElements/form/form.module.less');
+@import url('../usefulElements/usefulElements__form/usefulElements__form.module.less');
 @import url('../usefulElements/button/button.module.less');
-@import url('../usefulElements/notificationTemplate/notificationTemplate.module.less');
-@import url('./inviteLinks/inviteLinks.module.less');
-
-
+@import url('../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate.module.less');
+@import url('./roomPage__inviteLinks/roomPage__inviteLinks.module.less');
 
 .roomPage {
    padding: 30px 50px;
-}
 
-.headlineRoomPage {
-   margin: 0 auto;
-   margin-bottom: 50px;
-   width: fit-content;
-}
+   .roomPage__headline {
+      margin: 0 auto;
+      margin-bottom: 50px;
+      width: fit-content;
+   }
 
-.containerForm {
-   // border: solid 1px red;
-   display: flex;
-   width: auto;
-   justify-content: space-between;
-   align-items: center;
-}
+   .roomPage__container {
+      display: flex;
+      width: auto;
+      justify-content: space-between;
+      align-items: center;
+   }
 
-.buttonShell {
-   margin: 40px auto;
-   width: fit-content;
-   padding: 10px;
+   .roomPage__buttonShell {
+      margin: 40px auto;
+      width: fit-content;
+      padding: 10px;
+   }
 }

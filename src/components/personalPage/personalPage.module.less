@@ -1,39 +1,39 @@
 @import url("/src/App.module.less");
 @import url("../usefulElements/button/button.module.less");
-@import url("../usefulElements/notificationTemplate/notificationTemplate.module.less");
-@import url("../usefulElements/form/form.module.less");
+@import url("../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate.module.less");
+@import url("../usefulElements/usefulElements__form/usefulElements__form.module.less");
 
 .personalPage {
    padding: 30px 50px 50px;
-}
 
-.headlinePersonalPage {
-   margin: 0 auto;
-   margin-bottom: 80px;
-   width: fit-content;
-}
+   .personalPage__headline {
+      margin: 0 auto;
+      margin-bottom: 80px;
+      width: fit-content;
+   }
 
-.shellPersonalPage {
-   display: grid;
-   grid-template-columns: 1fr 1fr;
-   gap: 15px;
-   margin: 0 auto;
-   padding: 30px 40px;
-   width: fit-content;
-   border-radius: 10px;
-   background-color: @detailsBackgroundcolorThree;
-   color: @detailsBackgroundcolorTwo;
-}
+   .personalPage__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 0 auto;
+      padding: 30px 40px;
+      width: fit-content;
+      border-radius: 10px;
+      background-color: @detailsBackgroundcolorThree;
+      color: @detailsBackgroundcolorTwo;
 
-.title {
-   font: 400 35px @secondaryfont;
-   grid-column: span 2;
-   margin: 0 auto;
-   width: fit-content;
-}
+      .personalPage__title {
+         font: 400 35px @secondaryfont;
+         grid-column: span 2;
+         margin: 0 auto;
+         width: fit-content;
+      }
+   }
 
-.buttonShell {
-   margin: 40px auto;
-   width: fit-content;
-   padding: 10px;
+   .personalPage__buttonShell {
+      margin: 40px auto;
+      width: fit-content;
+      padding: 10px;
+   }
 }
