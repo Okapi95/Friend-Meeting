@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 import classes from "./entryPage.module.less";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Button from "../usefulElements/button/button";
 import Input from "../usefulElements/usefulElements__form/input";
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
-import axios from "axios";
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
+import {instance} from "../../axiosConfig";
 
 function EntryPage({
   changeAuth,
@@ -21,8 +21,8 @@ function EntryPage({
   const [errorDate, setErrorDate] = useState(false);
 
   const sendLoginRequest = () => {
-    axios
-      .post("https://meetroom.speakatalka.com/api/login", {
+    instance
+      .post("/login", {
         username: email,
         password: password,
       })

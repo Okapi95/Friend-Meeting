@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import classes from "./App.module.less";
-import axios from "axios";
 import ErrorPage from "./components/errorPage/errorPage";
 import LoginPage from "./components/login-page/loginPage";
 import InfoAboutProject from "./components/mainInfo/infoAboutProject";
@@ -10,8 +9,9 @@ import PersonalPage from "./components/personalPage/personalPage";
 import InviteLinks from "./components/roomPage/roomPage__inviteLinks/roomPage__inviteLinks";
 import EntryPage from "./components/entryPage/entryPage";
 import ExitPage from "./components/exitPage/exitPage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Layout} from "./components/Layout";
+import {instance} from "./axiosConfig";
 
 function App() {
   const [isVisiblePassword, setIsVisible] = useState(false);
@@ -21,8 +21,8 @@ function App() {
 
   const [isAuthenticated, setAuthenticated] = useState(false);
   const changeAuthenticationStatus = () => {
-    axios
-      .get("https://meetroom.speakatalka.com/api/auth")
+    instance
+      .get("/auth")
       .then((response) => {
         console.log(
           `ответ пришёл положительный, пользователь аутентифицирован ---> ${response}`
