@@ -11,7 +11,7 @@ import EntryPage from "./components/entryPage/entryPage";
 import ExitPage from "./components/exitPage/exitPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { instance } from "./axiosConfig";
+import { internalRequesAxios } from "./axiosConfig";
 
 function App() {
   const [isVisiblePassword, setIsVisible] = useState(false);
@@ -21,7 +21,7 @@ function App() {
 
   const [isAuthenticated, setAuthenticated] = useState(false);
   const changeAuthenticationStatus = () => {
-    instance
+    internalRequesAxios
       .get("/auth")
       .then((response) => {
         console.log(
@@ -31,7 +31,7 @@ function App() {
       })
       .catch((error) => console.log(`выскочила какая-то ошибка ---> ${error}`));
   };
-  checkAuthenticationStatus();
+  changeAuthenticationStatus();
 
   const changeAuth = (authenticationStatus) =>
     setAuthenticated(authenticationStatus);

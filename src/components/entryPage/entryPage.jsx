@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import classes from "./entryPage.module.less";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Button from "../usefulElements/button/button";
 import Input from "../usefulElements/usefulElements__form/input";
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
-import {Navigate} from "react-router-dom";
-import {instance} from "../../axiosConfig";
+import { Navigate } from "react-router-dom";
+import { internalRequesAxios } from "../../axiosConfig";
 
 function EntryPage({
   changeAuth,
@@ -21,7 +21,7 @@ function EntryPage({
   const [errorDate, setErrorDate] = useState(false);
 
   const sendLoginRequest = () => {
-    instance
+    internalRequesAxios
       .post("/login", {
         username: email,
         password: password,
@@ -35,26 +35,6 @@ function EntryPage({
         setErrorDate(true);
       });
   };
-
-  // возможно этот код пригодиться
-  // const blurHandler = (event) => {
-  //   switch (event.target.name) {
-  //     case "email":
-  //       setEmailDirty(true);
-  //       break;
-  //     case "password":
-  //       setPasswordDirty(true);
-  //       break;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (emailError || passwordError) {
-  //     setFormValid(false);
-  //   } else {
-  //     setFormValid(false);
-  //   }
-  // }, [emailError, passwordError]);
 
   return (
     <div>

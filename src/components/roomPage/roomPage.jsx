@@ -7,6 +7,7 @@ import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Textarea from "../usefulElements/usefulElements__form/textarea";
 import { toRequiredFormatDate } from "./functions";
 import { Navigate } from "react-router-dom";
+import { internalRequesAxios } from "../../axiosConfig";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
@@ -23,8 +24,10 @@ function RoomPage() {
   const [isRoomCreated, setIsRoomCreated] = useState(false);
 
   const sendCreateMeetingRequest = () => {
-    axios
-      .post("https://meetroom.speakatalka.com/api/meetings", {
+    internalRequesAxios
+      .post("/meetings", {
+        meetingId: 0,
+        owner: 0,
         name: meetingName,
         description: meetingDescription,
         meetingLink: meetingZoomlink,
@@ -36,11 +39,15 @@ function RoomPage() {
         ),
       })
       .then((response) => {
-        console.log(response);
+        console.log(
+          `встреча создалась, вот такой response пришёл: ---> ${response}`
+        );
         setIsRoomCreated(true);
       })
       .catch((error) => {
-        console.log("ошибка");
+        console.log(
+          `встреча НЕ создалась, вот такой error пришёл: ---> ${error}`
+        );
       });
   };
 

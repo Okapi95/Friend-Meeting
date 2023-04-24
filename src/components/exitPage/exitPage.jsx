@@ -18,23 +18,22 @@ function ExitPage({ changeAuth }) {
       <div className={classes.exitPage__buttonsShell}>
         <div className={classes.exitPage__shellButton}>
           <Button
-            buttonName="Да"
-            link="/entry"
+            // link="/entry"
             styleButton={classes.button_theme_light}
-            onClick={() => changeAuth()}
-          />
-          {/* Написать ещё смену состояния авторизации! */}
+            onClick={() => changeAuth(false)}
+          >
+            Да
+          </Button>
         </div>
         <div className={classes.exitPage__shellButton}>
           <Button
-            buttonName="Нет"
-            link="/personal-page"
             styleButton={classes.button_theme_rich}
             onClick={(event) => {
-              event.preventDefault();
               goBack();
             }}
-          />
+          >
+            Нет
+          </Button>
         </div>
       </div>
     </div>
