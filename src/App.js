@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import classes from "./App.module.less";
 import ErrorPage from "./components/errorPage/errorPage";
 import LoginPage from "./components/login-page/loginPage";
@@ -9,9 +9,9 @@ import PersonalPage from "./components/personalPage/personalPage";
 import InviteLinks from "./components/roomPage/roomPage__inviteLinks/roomPage__inviteLinks";
 import EntryPage from "./components/entryPage/entryPage";
 import ExitPage from "./components/exitPage/exitPage";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Layout} from "./components/Layout";
-import {instance} from "./axiosConfig";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import { instance } from "./axiosConfig";
 
 function App() {
   const [isVisiblePassword, setIsVisible] = useState(false);
@@ -31,7 +31,7 @@ function App() {
       })
       .catch((error) => console.log(`выскочила какая-то ошибка ---> ${error}`));
   };
-  changeAuthenticationStatus();
+  checkAuthenticationStatus();
 
   const changeAuth = (authenticationStatus) =>
     setAuthenticated(authenticationStatus);

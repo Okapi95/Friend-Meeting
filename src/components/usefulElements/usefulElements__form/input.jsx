@@ -13,6 +13,7 @@ function Input(props) {
         placeHolder={props.placeHolder}
         required={props.required}
       />
+      {props.children}
     </div>
   );
 }

@@ -78,17 +78,18 @@ function EntryPage({
               type={isVisiblePassword ? "text" : "password"}
               placeHolder="Введите пароль"
               required={true}
-            />
-            <div
-              className={classes.entryPage__iconVisiblePassword}
-              onClick={() => setIsVisible(!isVisiblePassword)}
             >
-              {isVisiblePassword ? (
-                <img src={svgopeneye} />
-              ) : (
-                <img src={svghideeye} />
-              )}
-            </div>
+              <div
+                className={classes.entryPage__iconVisiblePassword}
+                onClick={() => setIsVisible(!isVisiblePassword)}
+              >
+                {isVisiblePassword ? (
+                  <img src={svgopeneye} />
+                ) : (
+                  <img src={svghideeye} />
+                )}
+              </div>
+            </Input>
           </div>
           {errorDate && <div>Неправильно введен email или пароль</div>}
         </Form>

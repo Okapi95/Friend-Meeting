@@ -123,17 +123,18 @@ function LoginPage({ changeAuth, isVisiblePassword, setIsVisible }) {
               placeHolder="Введите пароль"
               required={true}
               autofocus={false}
-            />
-            <div
-              className={classes.loginPage__visiblePassword}
-              onClick={() => setIsVisible(!isVisiblePassword)}
             >
-              {isVisiblePassword ? (
-                <img src={svgopeneye} />
-              ) : (
-                <img src={svghideeye} />
-              )}
-            </div>
+              <div
+                className={classes.loginPage__visiblePassword}
+                onClick={() => setIsVisible(!isVisiblePassword)}
+              >
+                {isVisiblePassword ? (
+                  <img src={svgopeneye} />
+                ) : (
+                  <img src={svghideeye} />
+                )}
+              </div>
+            </Input>
           </div>
           {passwordRepeatDirty && passwordRepeatError && (
             <div>{passwordRepeatError}</div>
