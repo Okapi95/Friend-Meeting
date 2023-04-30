@@ -13,6 +13,12 @@ function Loginbar() {
       <Link to="/exit-page">
         <Button styleButton={classes.button_theme_light}>Выход</Button>
       </Link>,
+      <Button onClick={() => internalRequestAxios.get("/auth")}>
+        get.auth
+      </Button>,
+      <Button onClick={() => internalRequestAxios.get("/oauth/access_token")}>
+        get.access_token
+      </Button>,
     ];
   } else {
     button = [
@@ -22,9 +28,11 @@ function Loginbar() {
       <Link to="/entry">
         <Button styleButton={classes.button_theme_rich}>Вход</Button>
       </Link>,
-      <Button onClick={() => internalRequestAxios.get("/auth")}>test</Button>,
+      <Button onClick={() => internalRequestAxios.get("/auth")}>
+        get.auth
+      </Button>,
       <Button onClick={() => internalRequestAxios.get("/oauth/access_token")}>
-        test2
+        get.access_token
       </Button>,
     ];
   }

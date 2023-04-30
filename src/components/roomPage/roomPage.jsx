@@ -4,11 +4,14 @@ import classes from "./roomPage.module.less";
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Textarea from "../usefulElements/usefulElements__form/textarea";
-import { toRequiredFormatDate } from "./functionsForRoomPage";
-import { monitoringAuthorization } from "../../API-request/monitoringAuthorization";
+import {
+  toRequiredFormatDate,
+  sendCreateMeetingRequest,
+} from "./functionsForRoomPage";
+import { controlAuthorization } from "../../API-request/controlAuthorization";
 
 import { Navigate } from "react-router-dom";
-import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+// import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
@@ -25,34 +28,39 @@ function RoomPage() {
   const [chosenTime, setСhosenTime] = useState([new Date(), new Date()]);
   const [isRoomCreated, setIsRoomCreated] = useState(false);
 
-  const sendCreateMeetingRequest = () => {
-    internalRequestAxios
-      .post("/meetings", {
-        name: meetingName,
-        description: meetingDescription,
-        meetingLink: meetingZoomlink,
-        dates: toRequiredFormatDate(
-          chosenDate[0],
-          chosenDate[1],
-          chosenTime[0],
-          chosenTime[1]
-        ),
-      })
-      .then((response) => {
-        console.log(
-          `встреча создалась, вот такой response пришёл: ---> ${response}`
-        );
-        setIsRoomCreated(true);
-      })
-      .catch((error) => {
-        console.log(
-          `встреча НЕ создалась, вот такой error пришёл: ---> ${error}`
-        );
-      });
-  };
-
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.authStatus);
+
+  const creationMeetingHandler = async () => {
+    let errorAuthorization = await controlAuthorization();
+    console.log(`сначала было такое состояние:  ${authStatus}`);
+    console.log(
+      `вот что в начале записалось в переменную errorAuthorization:  ${errorAuthorization}`
+    );
+    if (!errorAuthorization) {
+      dispatch({
+        type: "authentication/changeAuthenticatedStatusToFalse",
+      });
+      console.log(
+        `сработало условие if, так как в переменную записалось значение ${errorAuthorization}, должен задиспачиться экшен со сменой состояния на false`
+      );
+    }
+    await sendCreateMeetingRequest(
+      meetingName,
+      meetingDescription,
+      meetingZoomlink,
+      setIsRoomCreated,
+      toRequiredFormatDate(
+        chosenDate[0],
+        chosenDate[1],
+        chosenTime[0],
+        chosenTime[1]
+      )
+    );
+    console.log(
+      `по итогу клика на создание комнаты такое сейчас состояние:  ${authStatus}`
+    );
+  };
   return (
     <div className={classes.roomPage}>
       <div className={classes.roomPage__headline}>
@@ -121,25 +129,7 @@ function RoomPage() {
       <div className={classes.roomPage__buttonShell}>
         <Button
           styleButton={classes.button_theme_rich}
-          onClick={async () => {
-            let errorAuthorization = await monitoringAuthorization();
-            console.log(`сначала было такое состояние:  ${authStatus}`);
-            console.log(
-              `вот что в начале записалось в переменную errorAuthorization:  ${errorAuthorization}`
-            );
-            if (!errorAuthorization) {
-              dispatch({
-                type: "authentication/changeAuthenticatedStatusToFalse",
-              });
-              console.log(
-                `сработало условие if, так как в переменную записалось значение ${errorAuthorization}, должен задиспачиться экшен со сменой состояния на false`
-              );
-            }
-            sendCreateMeetingRequest();
-            console.log(
-              `по итогу клика на создание комнаты такое сейчас состояние:  ${authStatus}`
-            );
-          }}
+          onClick={() => creationMeetingHandler()}
         >
           3. Создать комнату
         </Button>

@@ -1,6 +1,6 @@
 import { internalRequestAxios } from "./axiosConfigBaseURL";
 
-const monitoringAuthorization = async () => {
+const controlAuthorization = async () => {
   try {
     await internalRequestAxios.get("/auth");
     console.log("тогда проходи дальше в поздравление с созданием комнаты  ");
@@ -21,4 +21,4 @@ const monitoringAuthorization = async () => {
       });
   }
 };
-export { monitoringAuthorization };
+export { controlAuthorization };
