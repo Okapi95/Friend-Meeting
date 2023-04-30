@@ -3,11 +3,11 @@ import classes from "./header.module.css";
 import CompanyNameAndLogo from "../companyNameAndLogo/companyNameAndLogo.jsx";
 import Loginbar from "./__loginbar/header__loginbar";
 
-function Header(props) {
+function Header() {
   return (
     <header className={classes.header}>
       <CompanyNameAndLogo isSmall={false} />
-      <Loginbar isLoggedIn={props.isLoggedIn1} />
+      <Loginbar />
     </header>
   );
 }

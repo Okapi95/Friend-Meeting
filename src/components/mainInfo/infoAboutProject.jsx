@@ -1,8 +1,14 @@
 import React from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./infoAboutProject.module.less";
+import { useSelector } from "react-redux";
 
-function InfoAboutProject(props) {
+function InfoAboutProject() {
+  const authStatus = useSelector((state) => state.authStatus);
+  console.log(
+    "сейчас в инфе о проекте такой статус аутентификации-----> " + authStatus
+  );
+
   return (
     <div className={classes.aboutProject}>
       <div className={classes.aboutProject__mostparth}>
@@ -18,12 +24,10 @@ function InfoAboutProject(props) {
         смогут ВСЕ (наконец-то!)!
       </div>
       <div>
-        {props.isLoggedIn && (
-          <Button
-            styleButton={classes.button_theme_light}
-            buttonName="Вернуться в личный кабинет"
-            link="/personal-page"
-          />
+        {authStatus && (
+          <Button styleButton={classes.button_theme_light}>
+            Вернуться в личный кабинет
+          </Button>
         )}
       </div>
     </div>

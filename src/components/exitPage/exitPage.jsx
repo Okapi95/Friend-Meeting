@@ -41,8 +41,3 @@ function ExitPage({ changeAuth }) {
 }
 
 export default ExitPage;
-
-/*
-BASE_URL = 'https://meetroom.speakatalka.com';
-fetch(`$BASE_URL/api/auth`, (res) =>)
-*/

@@ -11,27 +11,23 @@ import EntryPage from "./components/entryPage/entryPage";
 import ExitPage from "./components/exitPage/exitPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { internalRequesAxios } from "./axiosConfig";
 
 function App() {
   const [isVisiblePassword, setIsVisible] = useState(false);
-  // const toggleVisiblePassword = (visibleStatus) => {
-  //   setIsVisible(visibleStatus);
-  // };
 
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const changeAuthenticationStatus = () => {
-    internalRequesAxios
-      .get("/auth")
-      .then((response) => {
-        console.log(
-          `ответ пришёл положительный, пользователь аутентифицирован ---> ${response}`
-        );
-        setAuthenticated(true);
-      })
-      .catch((error) => console.log(`выскочила какая-то ошибка ---> ${error}`));
-  };
-  changeAuthenticationStatus();
+  // const changeAuthenticationStatus = () => {
+  //   internalRequestAxios
+  //     .get("/auth")
+  //     .then((response) => {
+  //       console.log(
+  //         `ответ пришёл положительный, пользователь аутентифицирован`
+  //       );
+  //       setAuthenticated(true);
+  //     })
+  //     .catch((error) => console.log("пользователь не аутенцифицирован"));
+  // };
+  // changeAuthenticationStatus();
 
   const changeAuth = (authenticationStatus) =>
     setAuthenticated(authenticationStatus);
@@ -41,10 +37,7 @@ function App() {
       <div className={classes.app}>
         <Routes>
           <Route path="/" element={<Layout isLoggedIn={isAuthenticated} />}>
-            <Route
-              index
-              element={<InfoAboutProject isLoggedIn={isAuthenticated} />}
-            />
+            <Route index element={<InfoAboutProject />} />
             <Route
               path="registration"
               element={

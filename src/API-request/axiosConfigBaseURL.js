@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const internalRequesAxios = axios.create({
+export const internalRequestAxios = axios.create({
   baseURL: "https://meetroom.speakatalka.com/api",
   withCredentials: true,
 });

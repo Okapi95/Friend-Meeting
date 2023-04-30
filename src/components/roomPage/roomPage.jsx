@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./roomPage.module.less";
-import axios from "axios";
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Textarea from "../usefulElements/usefulElements__form/textarea";
-import { toRequiredFormatDate } from "./functions";
+import { toRequiredFormatDate } from "./functionsForRoomPage";
+import { monitoringAuthorization } from "../../API-request/monitoringAuthorization";
+
 import { Navigate } from "react-router-dom";
-import { internalRequesAxios } from "../../axiosConfig";
+import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
 import "rsuite/styles/index.less";
 import "./customDateRangePicker.module.less";
+import { useDispatch, useSelector } from "react-redux";
 
 function RoomPage() {
   const [meetingName, setMeetingName] = useState("");
@@ -24,10 +26,8 @@ function RoomPage() {
   const [isRoomCreated, setIsRoomCreated] = useState(false);
 
   const sendCreateMeetingRequest = () => {
-    internalRequesAxios
+    internalRequestAxios
       .post("/meetings", {
-        meetingId: 0,
-        owner: 0,
         name: meetingName,
         description: meetingDescription,
         meetingLink: meetingZoomlink,
@@ -51,6 +51,8 @@ function RoomPage() {
       });
   };
 
+  const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.authStatus);
   return (
     <div className={classes.roomPage}>
       <div className={classes.roomPage__headline}>
@@ -119,11 +121,31 @@ function RoomPage() {
       <div className={classes.roomPage__buttonShell}>
         <Button
           styleButton={classes.button_theme_rich}
-          onClick={() => sendCreateMeetingRequest()}
+          onClick={async () => {
+            let errorAuthorization = await monitoringAuthorization();
+            console.log(`сначала было такое состояние:  ${authStatus}`);
+            console.log(
+              `вот что в начале записалось в переменную errorAuthorization:  ${errorAuthorization}`
+            );
+            if (!errorAuthorization) {
+              dispatch({
+                type: "authentication/changeAuthenticatedStatusToFalse",
+              });
+              console.log(
+                `сработало условие if, так как в переменную записалось значение ${errorAuthorization}, должен задиспачиться экшен со сменой состояния на false`
+              );
+            }
+            sendCreateMeetingRequest();
+            console.log(
+              `по итогу клика на создание комнаты такое сейчас состояние:  ${authStatus}`
+            );
+          }}
         >
           3. Создать комнату
         </Button>
         {isRoomCreated && <Navigate to="/created-room" replace={true} />}
+        {/* почему так нельзя писать? */}
+        {/* {errorAuthorization && {dispatch({ type: "authentication/changeAuthenticatedStatusToTrue" })}} */}
       </div>
     </div>
   );

@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./loginPage.module.less";
-import axios from "axios";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Input from "../usefulElements/usefulElements__form/input";
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
-import { redirect, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
-function LoginPage({ changeAuth, isVisiblePassword, setIsVisible }) {
-  // const [isVisible, setIsVisible] = useState(false);
-
+function LoginPage({ isVisiblePassword, setIsVisible }) {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordRepeat, setRegisterPasswordRepeat] = useState("");
@@ -37,7 +35,6 @@ function LoginPage({ changeAuth, isVisiblePassword, setIsVisible }) {
     }
   };
 
-  // event.target.value.length < 6 || event.target.value.length > 16
   const passwordHandler = (event) => {
     setRegisterPassword(event.target.value);
     const re = /^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9]).{6,}$/i;
@@ -72,10 +69,9 @@ function LoginPage({ changeAuth, isVisiblePassword, setIsVisible }) {
         break;
     }
   };
-  // в бэке добавить проверку на валидность почты
   const sendRegisterRequest = () => {
-    axios
-      .post("https://meetroom.speakatalka.com/api/auth/register", {
+    internalRequestAxios
+      .post("/auth/register", {
         email: registerEmail,
         password: registerPassword,
         confirmPassword: registerPasswordRepeat,
@@ -96,7 +92,6 @@ function LoginPage({ changeAuth, isVisiblePassword, setIsVisible }) {
         }
       });
   };
-  // код про проверку валидности на кнопку сабмит с импользованием useEffect?
   return (
     <div>
       <div className={classes.loginPage}>

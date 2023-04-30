@@ -6,29 +6,27 @@ import Input from "../usefulElements/usefulElements__form/input";
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
 import { Navigate } from "react-router-dom";
-import { internalRequesAxios } from "../../axiosConfig";
+import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+import { useDispatch, useSelector } from "react-redux";
 
-function EntryPage({
-  changeAuth,
-  isLoggedIn,
-  isVisiblePassword,
-  setIsVisible,
-}) {
-  // const [isVisible, setIsVisible] = useState(false);
-
+function EntryPage({ isVisiblePassword, setIsVisible }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorDate, setErrorDate] = useState(false);
+  const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.authStatus);
+  console.log("fds  " + authStatus);
 
   const sendLoginRequest = () => {
-    internalRequesAxios
+    internalRequestAxios
       .post("/login", {
         username: email,
         password: password,
       })
       .then((response) => {
         console.log(response);
-        changeAuth(true);
+        dispatch({ type: "authentication/changeAuthenticatedStatusToTrue" });
+        console.log("ответ пришёл 200, пользователь залогинился");
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +42,6 @@ function EntryPage({
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             name="email"
-            // onBlur={(event) => blurHandler(event)}
             type="email"
             placeHolder="Введите Email"
             required={true}
@@ -54,7 +51,6 @@ function EntryPage({
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               name="password"
-              // onBlur={(event) => blurHandler(event)}
               type={isVisiblePassword ? "text" : "password"}
               placeHolder="Введите пароль"
               required={true}
@@ -80,11 +76,10 @@ function EntryPage({
           >
             Войти в личный кабинет
           </Button>
-          {isLoggedIn && <Navigate to={"/personal-page"} />}
+          {authStatus && <Navigate to={"/personal-page"} />}
         </div>
       </div>
     </div>
   );
 }
-
 export default EntryPage;
