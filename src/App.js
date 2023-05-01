@@ -63,15 +63,7 @@ function App() {
                 />
               }
             />
-            <Route
-              path="exit-page"
-              element={
-                <ExitPage
-                  isLoggedIn={isAuthenticated}
-                  changeAuth={changeAuth}
-                />
-              }
-            />
+            <Route path="exit-page" element={<ExitPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

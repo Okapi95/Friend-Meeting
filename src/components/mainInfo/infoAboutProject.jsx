@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../usefulElements/button/button";
 import classes from "./infoAboutProject.module.less";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function InfoAboutProject() {
   const authStatus = useSelector((state) => state.authStatus);
@@ -25,9 +26,11 @@ function InfoAboutProject() {
       </div>
       <div>
         {authStatus && (
-          <Button styleButton={classes.button_theme_light}>
-            Вернуться в личный кабинет
-          </Button>
+          <Link to={"/personal-page"}>
+            <Button styleButton={classes.button_theme_light}>
+              Вернуться в личный кабинет
+            </Button>
+          </Link>
         )}
       </div>
     </div>

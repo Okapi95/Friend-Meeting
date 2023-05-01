@@ -11,7 +11,6 @@ import {
 import { controlAuthorization } from "../../API-request/controlAuthorization";
 
 import { Navigate } from "react-router-dom";
-// import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
@@ -134,8 +133,6 @@ function RoomPage() {
           3. Создать комнату
         </Button>
         {isRoomCreated && <Navigate to="/created-room" replace={true} />}
-        {/* почему так нельзя писать? */}
-        {/* {errorAuthorization && {dispatch({ type: "authentication/changeAuthenticatedStatusToTrue" })}} */}
       </div>
     </div>
   );

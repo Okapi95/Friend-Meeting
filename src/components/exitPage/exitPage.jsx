@@ -1,10 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import classes from "./exitPage.module.less";
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import Button from "../usefulElements/button/button";
+import { useDispatch, useSelector } from "react-redux";
+import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
-function ExitPage({ changeAuth }) {
+function ExitPage() {
+  const dispatch = useDispatch();
+  let authStatus;
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
   return (
@@ -20,15 +24,27 @@ function ExitPage({ changeAuth }) {
           <Button
             // link="/entry"
             styleButton={classes.button_theme_light}
-            onClick={() => changeAuth(false)}
+            onClick={async () => {
+              await internalRequestAxios
+                .get("/logout")
+                .then(() => {
+                  dispatch({
+                    type: "authentication/changeAuthenticatedStatusToFalse",
+                  });
+                })
+                .catch(() => {
+                  console.log("ошибка запроса разлогина");
+                });
+            }}
           >
             Да
           </Button>
+          {!useSelector((state) => state.authStatus) && <Navigate to={"/"} />}
         </div>
         <div className={classes.exitPage__shellButton}>
           <Button
             styleButton={classes.button_theme_rich}
-            onClick={(event) => {
+            onClick={() => {
               goBack();
             }}
           >
