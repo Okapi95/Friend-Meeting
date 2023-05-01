@@ -3,10 +3,10 @@ import classes from "./layout.module.less";
 import Header from "./header/header";
 import Footer from "./footer/footer";
 
-function Layout(props) {
+function Layout() {
   return (
     <>
-      <Header isLoggedIn1={props.isLoggedIn} />
+      <Header />
       <Outlet className={classes.outlet} />
       <Footer />
     </>

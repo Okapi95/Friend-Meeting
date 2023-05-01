@@ -14,8 +14,6 @@ import { Layout } from "./components/Layout";
 
 function App() {
   const [isVisiblePassword, setIsVisible] = useState(false);
-
-  const [isAuthenticated, setAuthenticated] = useState(false);
   // const changeAuthenticationStatus = () => {
   //   internalRequestAxios
   //     .get("/auth")
@@ -29,20 +27,18 @@ function App() {
   // };
   // changeAuthenticationStatus();
 
-  const changeAuth = (authenticationStatus) =>
-    setAuthenticated(authenticationStatus);
+  console.log("Перерисовалась SPA");
 
   return (
     <BrowserRouter>
       <div className={classes.app}>
         <Routes>
-          <Route path="/" element={<Layout isLoggedIn={isAuthenticated} />}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<InfoAboutProject />} />
             <Route
               path="registration"
               element={
                 <LoginPage
-                  changeAuth={changeAuth}
                   isVisiblePassword={isVisiblePassword}
                   setIsVisible={setIsVisible}
                 />
@@ -56,8 +52,6 @@ function App() {
               path="entry"
               element={
                 <EntryPage
-                  changeAuth={changeAuth}
-                  isLoggedIn={isAuthenticated}
                   isVisiblePassword={isVisiblePassword}
                   setIsVisible={setIsVisible}
                 />
