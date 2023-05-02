@@ -1,7 +1,8 @@
 import React from "react";
+import classes from "./roomPage__inviteLinks.module.less";
+
 import Button from "../../usefulElements/button/button";
 import NotificationTemplate from "../../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
-import classes from "./roomPage__inviteLinks.module.less";
 
 function InviteLinks(props) {
   const text =

@@ -1,12 +1,17 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import classes from "./exitPage.module.less";
+
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import Button from "../usefulElements/button/button";
+
+import { authorizationSlice } from "../../store/features/authorizationSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+
 import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
 function ExitPage() {
+  const { changeAuthStatusToFalse } = authorizationSlice.actions;
   const dispatch = useDispatch();
   let authStatus;
   const navigate = useNavigate();
@@ -28,9 +33,7 @@ function ExitPage() {
               await internalRequestAxios
                 .get("/logout")
                 .then(() => {
-                  dispatch({
-                    type: "authentication/changeAuthenticatedStatusToFalse",
-                  });
+                  dispatch(changeAuthStatusToFalse());
                 })
                 .catch(() => {
                   console.log("ошибка запроса разлогина");
@@ -39,7 +42,9 @@ function ExitPage() {
           >
             Да
           </Button>
-          {!useSelector((state) => state.authStatus) && <Navigate to={"/"} />}
+          {!useSelector((state) => state.authorization.authStatus) && (
+            <Navigate to={"/"} />
+          )}
         </div>
         <div className={classes.exitPage__shellButton}>
           <Button

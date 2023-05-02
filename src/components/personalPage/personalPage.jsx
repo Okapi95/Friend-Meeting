@@ -1,8 +1,10 @@
 import React from "react";
-import Button from "../usefulElements/button/button";
 import classes from "./personalPage.module.less";
+
+import Button from "../usefulElements/button/button";
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
+
 import { Link } from "react-router-dom";
 
 function PersonalPage() {

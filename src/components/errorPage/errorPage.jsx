@@ -1,6 +1,7 @@
 import React from "react";
-import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import classes from "./errorPage.module.less";
+
+import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 
 function ErrorPage() {
   return (

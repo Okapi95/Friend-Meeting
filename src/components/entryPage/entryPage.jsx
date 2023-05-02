@@ -1,21 +1,31 @@
 import React, { useState } from "react";
 import classes from "./entryPage.module.less";
+
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Button from "../usefulElements/button/button";
 import Input from "../usefulElements/usefulElements__form/input";
+
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
-import { Navigate } from "react-router-dom";
+
 import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+
+import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { authorizationSlice } from "../../store/features/authorizationSlice";
 
 function EntryPage({ isVisiblePassword, setIsVisible }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorDate, setErrorDate] = useState(false);
+
+  const { changeAuthStatusToTrue } = authorizationSlice.actions;
   const dispatch = useDispatch();
-  const authStatus = useSelector((state) => state.authStatus);
-  console.log("fds  " + authStatus);
+  const authStatus = useSelector((state) => {
+    console.log(state);
+    return state.authorization.authStatus;
+  });
+  console.log(authStatus);
 
   const sendLoginRequest = () => {
     internalRequestAxios
@@ -25,7 +35,8 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
       })
       .then((response) => {
         console.log(response);
-        dispatch({ type: "authentication/changeAuthenticatedStatusToTrue" });
+        // dispatch({ type: "authentication/changeAuthenticatedStatusToTrue" });
+        dispatch(changeAuthStatusToTrue());
         console.log("ответ пришёл 200, пользователь залогинился");
       })
       .catch((error) => {

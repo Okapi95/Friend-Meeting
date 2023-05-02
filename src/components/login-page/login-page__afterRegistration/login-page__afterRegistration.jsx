@@ -1,7 +1,9 @@
 import React from "react";
 import classes from "./login-page__afterRegistration.module.less";
+
 import NotificationTemplate from "../../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import Button from "../../usefulElements/button/button";
+
 import { Link } from "react-router-dom";
 
 function AfterRegistration() {

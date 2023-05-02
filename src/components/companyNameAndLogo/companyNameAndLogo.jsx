@@ -1,7 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 import classes from "./companyNameAndLogo.module.less";
+
 import svg from "../../images/logo.svg";
+
 import { Link } from "react-router-dom";
 
 function CompanyNameAndLogo(props) {

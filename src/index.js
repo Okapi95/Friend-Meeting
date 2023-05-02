@@ -1,34 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { legacy_createStore as createStore } from "redux";
+import store from "./store/store";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-const initialState = {
-  authStatus: false,
-};
-
-const authenticationReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "authentication/changeAuthenticatedStatusToTrue":
-      return {
-        ...state,
-        authStatus: true,
-      };
-    case "authentication/changeAuthenticatedStatusToFalse":
-      return {
-        ...state,
-        authStatus: false,
-      };
-
-    default:
-      return state;
-  }
-};
-
-const store = createStore(authenticationReducer);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

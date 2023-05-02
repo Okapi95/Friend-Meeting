@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./footer.module.less";
+
 import CompanyNameAndLogo from "../companyNameAndLogo/companyNameAndLogo.jsx";
+
 import svggmail from "../../images/iconsgmail.svg";
 import svgtelegram from "../../images/iconstelegram.svg";
 import svggithub from "../../images/iconsgithub.svg";

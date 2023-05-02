@@ -1,12 +1,15 @@
 import React from "react";
 import classes from "./header__loginbar.module.less";
+
 import Button from "../../usefulElements/button/button";
+
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import { internalRequestAxios } from "../../../API-request/axiosConfigBaseURL";
 
 function Loginbar() {
-  const authStatus = useSelector((state) => state.authStatus);
+  const authStatus = useSelector((state) => state.authorization.authStatus);
   let button = [];
   if (authStatus) {
     button = [

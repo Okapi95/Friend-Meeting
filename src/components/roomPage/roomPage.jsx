@@ -1,22 +1,25 @@
 import React, { useState } from "react";
-import Button from "../usefulElements/button/button";
 import classes from "./roomPage.module.less";
-import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
+
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Textarea from "../usefulElements/usefulElements__form/textarea";
+import Button from "../usefulElements/button/button";
+import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
+
 import {
   toRequiredFormatDate,
   sendCreateMeetingRequest,
 } from "./functionsForRoomPage";
 import { controlAuthorization } from "../../API-request/controlAuthorization";
 
+import { authorizationSlice } from "../../store/features/authorizationSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 // библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
 import "rsuite/styles/index.less";
 import "./customDateRangePicker.module.less";
-import { useDispatch, useSelector } from "react-redux";
 
 function RoomPage() {
   const [meetingName, setMeetingName] = useState("");
@@ -27,21 +30,20 @@ function RoomPage() {
   const [chosenTime, setСhosenTime] = useState([new Date(), new Date()]);
   const [isRoomCreated, setIsRoomCreated] = useState(false);
 
+  const { changeAuthStatusToFalse } = authorizationSlice.actions;
   const dispatch = useDispatch();
-  const authStatus = useSelector((state) => state.authStatus);
+  const authStatus = useSelector((state) => state.authorization.authStatus);
 
   const creationMeetingHandler = async () => {
-    let errorAuthorization = await controlAuthorization();
+    let isStatusAuthorization = await controlAuthorization();
     console.log(`сначала было такое состояние:  ${authStatus}`);
     console.log(
-      `вот что в начале записалось в переменную errorAuthorization:  ${errorAuthorization}`
+      `вот что в начале записалось в переменную errorAuthorization:  ${isStatusAuthorization}`
     );
-    if (!errorAuthorization) {
-      dispatch({
-        type: "authentication/changeAuthenticatedStatusToFalse",
-      });
+    if (!isStatusAuthorization) {
+      dispatch(changeAuthStatusToFalse());
       console.log(
-        `сработало условие if, так как в переменную записалось значение ${errorAuthorization}, должен задиспачиться экшен со сменой состояния на false`
+        `сработало условие if, так как в переменную записалось значение ${isStatusAuthorization}, должен задиспачиться экшен со сменой состояния на false`
       );
     }
     await sendCreateMeetingRequest(
