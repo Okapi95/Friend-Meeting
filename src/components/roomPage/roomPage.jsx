@@ -5,6 +5,7 @@ import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Textarea from "../usefulElements/usefulElements__form/textarea";
 import Button from "../usefulElements/button/button";
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
+import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 
 import {
   toRequiredFormatDate,
@@ -32,7 +33,7 @@ function RoomPage() {
 
   const { changeAuthStatusToFalse } = authorizationSlice.actions;
   const dispatch = useDispatch();
-  const authStatus = useSelector((state) => state.authorization.authStatus);
+  const authStatus = useSelector((state) => state.authStatus);
 
   const creationMeetingHandler = async () => {
     let isStatusAuthorization = await controlAuthorization();
@@ -70,7 +71,9 @@ function RoomPage() {
       <div className={classes.roomPage__container}>
         <Form headline="1. Заполните форму встречи">
           {!meetingName && (
-            <div>поле нейм не должно быть пустым! дописать код.</div>
+            <SimpleTextBlock>
+              Обязательно впишите название встречи
+            </SimpleTextBlock>
           )}
           <Textarea
             value={meetingName}
@@ -103,7 +106,7 @@ function RoomPage() {
         </Form>
 
         <Form headline="2. Выберите дату и время">
-          <p>Выберите подходящий интервал дат</p>
+          <SimpleTextBlock>Выберите подходящий интервал дат</SimpleTextBlock>
           <DateRangePicker
             value={chosenDate}
             onChange={setСhosenDate}
@@ -112,7 +115,9 @@ function RoomPage() {
             defaultCalendarValue={[new Date(), new Date()]}
             placement="leftStart"
           />
-          <p>Выберите подходящий интервал времени</p>
+          <SimpleTextBlock>
+            Выберите подходящий интервал времени
+          </SimpleTextBlock>
           <DateRangePicker
             value={chosenTime}
             onChange={setСhosenTime}

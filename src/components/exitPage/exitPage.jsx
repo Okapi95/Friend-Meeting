@@ -42,9 +42,7 @@ function ExitPage() {
           >
             Да
           </Button>
-          {!useSelector((state) => state.authorization.authStatus) && (
-            <Navigate to={"/"} />
-          )}
+          {!useSelector((state) => state.authStatus) && <Navigate to={"/"} />}
         </div>
         <div className={classes.exitPage__shellButton}>
           <Button

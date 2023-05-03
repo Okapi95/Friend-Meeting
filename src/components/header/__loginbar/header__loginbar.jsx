@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { internalRequestAxios } from "../../../API-request/axiosConfigBaseURL";
 
 function Loginbar() {
-  const authStatus = useSelector((state) => state.authorization.authStatus);
+  const authStatus = useSelector((state) => state.authStatus);
   let button = [];
   if (authStatus) {
     button = [

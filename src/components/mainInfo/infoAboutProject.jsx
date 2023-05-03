@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function InfoAboutProject() {
-  const authStatus = useSelector((state) => state.authorization.authStatus);
+  const authStatus = useSelector((state) => state.authStatus);
   console.log(
     "сейчас в инфе о проекте такой статус аутентификации-----> " + authStatus
   );

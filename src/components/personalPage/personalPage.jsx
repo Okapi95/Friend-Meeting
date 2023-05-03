@@ -6,6 +6,7 @@ import NotificationTemplate from "../usefulElements/usefulElements__notification
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 
 import { Link } from "react-router-dom";
+import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 
 function PersonalPage() {
   return (
@@ -16,12 +17,11 @@ function PersonalPage() {
       <div className={classes.personalPage__container}>
         <div className={classes.personalPage__title}>Мои встречи</div>
         <Form headline="Прошедшие">
-          <div>Тут список встреч</div>
+          <SimpleTextBlock>Список прошедших встреч</SimpleTextBlock>
         </Form>
         <Form headline="Предстоящие">
-          <div>Тут список других встреч</div>
+          <SimpleTextBlock>Список предстоящих встреч</SimpleTextBlock>
         </Form>
-        <div></div>
       </div>
 
       <div className={classes.personalPage__buttonShell}>

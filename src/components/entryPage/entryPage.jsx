@@ -4,6 +4,7 @@ import classes from "./entryPage.module.less";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Button from "../usefulElements/button/button";
 import Input from "../usefulElements/usefulElements__form/input";
+import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
@@ -21,11 +22,7 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
 
   const { changeAuthStatusToTrue } = authorizationSlice.actions;
   const dispatch = useDispatch();
-  const authStatus = useSelector((state) => {
-    console.log(state);
-    return state.authorization.authStatus;
-  });
-  console.log(authStatus);
+  const authStatus = useSelector((state) => state.authStatus);
 
   const sendLoginRequest = () => {
     internalRequestAxios
@@ -33,14 +30,12 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
         username: email,
         password: password,
       })
-      .then((response) => {
-        console.log(response);
-        // dispatch({ type: "authentication/changeAuthenticatedStatusToTrue" });
+      .then(() => {
         dispatch(changeAuthStatusToTrue());
         console.log("ответ пришёл 200, пользователь залогинился");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.log(`вход не удался, состояние по прежнему: ${authStatus}`);
         setErrorDate(true);
       });
   };
@@ -78,7 +73,9 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
               </div>
             </Input>
           </div>
-          {errorDate && <div>Неправильно введен email или пароль</div>}
+          {errorDate && (
+            <SimpleTextBlock>Неверно введён логин или пароль</SimpleTextBlock>
+          )}
         </Form>
         <div className={classes.entryPage__buttonShell}>
           <Button

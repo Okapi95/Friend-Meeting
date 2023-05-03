@@ -4,6 +4,7 @@ import classes from "./loginPage.module.less";
 import Button from "../usefulElements/button/button";
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 import Input from "../usefulElements/usefulElements__form/input";
+import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
@@ -99,7 +100,9 @@ function LoginPage({ isVisiblePassword, setIsVisible }) {
     <div>
       <div className={classes.loginPage}>
         <Form headline="Регистрация">
-          {emailDirty && emailError && <div>{emailError}</div>}
+          {emailDirty && emailError && (
+            <SimpleTextBlock>{emailError}</SimpleTextBlock>
+          )}
           <Input
             value={registerEmail}
             onChange={(event) => emailHandler(event)}
@@ -110,7 +113,9 @@ function LoginPage({ isVisiblePassword, setIsVisible }) {
             required={true}
             autofocus={false}
           />
-          {passwordDirty && passwordError && <div>{passwordError}</div>}
+          {passwordDirty && passwordError && (
+            <SimpleTextBlock>{passwordError}</SimpleTextBlock>
+          )}
           <div className={classes.loginPage__password}>
             <Input
               value={registerPassword}
@@ -135,7 +140,7 @@ function LoginPage({ isVisiblePassword, setIsVisible }) {
             </Input>
           </div>
           {passwordRepeatDirty && passwordRepeatError && (
-            <div>{passwordRepeatError}</div>
+            <SimpleTextBlock>{passwordRepeatError}</SimpleTextBlock>
           )}
           <Input
             onChange={(event) => passwordRepeatHandler(event)}
