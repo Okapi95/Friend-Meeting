@@ -12,7 +12,7 @@ import svgopeneye from "../../images/iconopeneye.svg";
 import { Navigate } from "react-router-dom";
 import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
-function LoginPage({ isVisiblePassword, setIsVisible }) {
+function LoginPage({ isVisiblePassword, setIsVisiblePassword }) {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordRepeat, setRegisterPasswordRepeat] = useState("");
@@ -129,7 +129,7 @@ function LoginPage({ isVisiblePassword, setIsVisible }) {
             >
               <div
                 className={classes.loginPage__visiblePassword}
-                onClick={() => setIsVisible(!isVisiblePassword)}
+                onClick={() => setIsVisiblePassword(!isVisiblePassword)}
               >
                 {isVisiblePassword ? (
                   <img src={svgopeneye} />

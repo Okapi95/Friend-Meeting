@@ -15,7 +15,7 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authorizationSlice } from "../../store/features/authorizationSlice";
 
-function EntryPage({ isVisiblePassword, setIsVisible }) {
+function EntryPage({ isVisiblePassword, setIsVisiblePassword }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorDate, setErrorDate] = useState(false);
@@ -47,6 +47,11 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
           <Input
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                sendLoginRequest();
+              }
+            }}
             name="email"
             type="email"
             placeHolder="Введите Email"
@@ -56,6 +61,11 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
             <Input
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  sendLoginRequest();
+                }
+              }}
               name="password"
               type={isVisiblePassword ? "text" : "password"}
               placeHolder="Введите пароль"
@@ -63,7 +73,7 @@ function EntryPage({ isVisiblePassword, setIsVisible }) {
             >
               <div
                 className={classes.entryPage__iconVisiblePassword}
-                onClick={() => setIsVisible(!isVisiblePassword)}
+                onClick={() => setIsVisiblePassword(!isVisiblePassword)}
               >
                 {isVisiblePassword ? (
                   <img src={svgopeneye} />

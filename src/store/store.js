@@ -17,6 +17,8 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  // не получается правильно задать значение, что бы состояние авторизации прекратило сохраняться в локал сторадж. P.s. при тестировании лучше закоментить функцию changeStartingStateAuthorization в APP
+  blacklist: ["?"],
 };
 const persistedReducer = persistReducer(persistConfig, authorizationReducer);
 

@@ -7,6 +7,7 @@ function Input(props) {
       <input
         value={props.value}
         onChange={props.onChange}
+        onKeyDown={props.onKeyDown}
         name={props.name}
         onBlur={props.onBlur}
         type={props.type}

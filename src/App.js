@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import classes from "./App.module.less";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
+
 import ErrorPage from "./components/errorPage/errorPage";
 import LoginPage from "./components/login-page/loginPage";
 import InfoAboutProject from "./components/mainInfo/infoAboutProject";
@@ -9,25 +12,37 @@ import PersonalPage from "./components/personalPage/personalPage";
 import InviteLinks from "./components/roomPage/roomPage__inviteLinks/roomPage__inviteLinks";
 import EntryPage from "./components/entryPage/entryPage";
 import ExitPage from "./components/exitPage/exitPage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout";
+
+import { useDispatch } from "react-redux";
+import { controlAuthorization } from "./API-request/controlAuthorization";
+import {
+  changeAuthStatusToFalse,
+  changeAuthStatusToTrue,
+} from "./store/features/authorizationSlice";
 
 function App() {
-  const [isVisiblePassword, setIsVisible] = useState(false);
-  // const changeAuthenticationStatus = () => {
-  //   internalRequestAxios
-  //     .get("/auth")
-  //     .then((response) => {
-  //       console.log(
-  //         `ответ пришёл положительный, пользователь аутентифицирован`
-  //       );
-  //       setAuthenticated(true);
-  //     })
-  //     .catch((error) => console.log("пользователь не аутенцифицирован"));
-  // };
-  // changeAuthenticationStatus();
-
   console.log("Перерисовалась SPA");
+  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const dispatch = useDispatch();
+
+  const changeStartingStateAuthorization = async () => {
+    try {
+      if (await controlAuthorization()) {
+        dispatch(changeAuthStatusToTrue());
+        console.log(
+          "true-условие срабтало в арр, состояние должно было поменяться на true"
+        );
+      } else {
+        dispatch(changeAuthStatusToFalse());
+        console.log(
+          "провалилось в else, заничит толькователь не авторизован вообще, состояние должно быть false"
+        );
+      }
+    } catch (error) {
+      console.log("что-то совсем пошло не так");
+    }
+  };
+  changeStartingStateAuthorization();
 
   return (
     <BrowserRouter>
@@ -40,7 +55,7 @@ function App() {
               element={
                 <LoginPage
                   isVisiblePassword={isVisiblePassword}
-                  setIsVisible={setIsVisible}
+                  setIsVisiblePassword={setIsVisiblePassword}
                 />
               }
             />
@@ -53,7 +68,7 @@ function App() {
               element={
                 <EntryPage
                   isVisiblePassword={isVisiblePassword}
-                  setIsVisible={setIsVisible}
+                  setIsVisiblePassword={setIsVisiblePassword}
                 />
               }
             />
