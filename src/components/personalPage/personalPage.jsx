@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./personalPage.module.less";
 
 import Button from "../usefulElements/button/button";
@@ -7,8 +7,40 @@ import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 
 import { Link } from "react-router-dom";
 import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
+import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
 function PersonalPage() {
+  const [meetings, setMeetings] = useState([]);
+  // const sendMeetingsRequest = () => {
+  //   internalRequestAxios
+  //     .get("/meetings")
+  //     .then((response) => {
+  //       return response.data.content;
+  //     })
+  //     .then((array) => {
+  //       console.log("ошибка в запросе на встречи");
+  //       setMeetings(array);
+  //     });
+  // };
+
+  useEffect(() => {
+    internalRequestAxios
+      .get("/meetings")
+      .then((response) => {
+        return response.data.content;
+      })
+      .then((array) => {
+        // let newArray = [[], ...array];
+        // console.log("это новый" + newArray);
+        console.log(array);
+        setMeetings(array);
+      })
+      .catch(() => {
+        console.log("ошибка в запросе на встречи");
+      });
+  }, []);
+  console.log(meetings);
+
   return (
     <div className={classes.personalPage}>
       <div className={classes.personalPage__headline}>
@@ -20,7 +52,9 @@ function PersonalPage() {
           <SimpleTextBlock>Список прошедших встреч</SimpleTextBlock>
         </Form>
         <Form headline="Предстоящие">
-          <SimpleTextBlock>Список предстоящих встреч</SimpleTextBlock>
+          {meetings.map((meetingName) => (
+            <SimpleTextBlock>{meetingName.description}</SimpleTextBlock>
+          ))}
         </Form>
       </div>
 

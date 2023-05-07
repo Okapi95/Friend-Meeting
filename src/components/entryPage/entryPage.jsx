@@ -15,10 +15,12 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authorizationSlice } from "../../store/features/authorizationSlice";
 
-function EntryPage({ isVisiblePassword, setIsVisiblePassword }) {
+function EntryPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorDate, setErrorDate] = useState(false);
+
+  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
 
   const { changeAuthStatusToTrue } = authorizationSlice.actions;
   const dispatch = useDispatch();
@@ -73,7 +75,11 @@ function EntryPage({ isVisiblePassword, setIsVisiblePassword }) {
             >
               <div
                 className={classes.entryPage__iconVisiblePassword}
-                onClick={() => setIsVisiblePassword(!isVisiblePassword)}
+                onClick={() =>
+                  setIsVisiblePassword(
+                    (isVisiblePassword) => !isVisiblePassword
+                  )
+                }
               >
                 {isVisiblePassword ? (
                   <img src={svgopeneye} />

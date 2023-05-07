@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import classes from "./App.module.less";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
@@ -22,7 +22,6 @@ import {
 
 function App() {
   console.log("Перерисовалась SPA");
-  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const dispatch = useDispatch();
 
   const changeStartingStateAuthorization = async () => {
@@ -50,28 +49,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<InfoAboutProject />} />
-            <Route
-              path="registration"
-              element={
-                <LoginPage
-                  isVisiblePassword={isVisiblePassword}
-                  setIsVisiblePassword={setIsVisiblePassword}
-                />
-              }
-            />
+            <Route path="registration" element={<LoginPage />} />
             <Route path="user-has-registered" element={<AfterRegistration />} />
             <Route path="personal-page" element={<PersonalPage />} />
             <Route path="create-room" element={<RoomPage />} />
             <Route path="created-room" element={<InviteLinks />} />
-            <Route
-              path="entry"
-              element={
-                <EntryPage
-                  isVisiblePassword={isVisiblePassword}
-                  setIsVisiblePassword={setIsVisiblePassword}
-                />
-              }
-            />
+            <Route path="entry" element={<EntryPage />} />
             <Route path="exit-page" element={<ExitPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>

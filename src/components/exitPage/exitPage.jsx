@@ -13,9 +13,10 @@ import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 function ExitPage() {
   const { changeAuthStatusToFalse } = authorizationSlice.actions;
   const dispatch = useDispatch();
-  let authStatus;
+  const authStatus = useSelector((state) => state.authStatus);
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
+
   return (
     <div className={classes.exitPage}>
       <div className={classes.exitPage__exitText}>
@@ -27,13 +28,13 @@ function ExitPage() {
       <div className={classes.exitPage__buttonsShell}>
         <div className={classes.exitPage__shellButton}>
           <Button
-            // link="/entry"
             styleButton={classes.button_theme_light}
             onClick={async () => {
               await internalRequestAxios
                 .get("/logout")
                 .then(() => {
                   dispatch(changeAuthStatusToFalse());
+                  console.log(authStatus);
                 })
                 .catch(() => {
                   console.log("ошибка запроса разлогина");
@@ -42,7 +43,7 @@ function ExitPage() {
           >
             Да
           </Button>
-          {!useSelector((state) => state.authStatus) && <Navigate to={"/"} />}
+          {!authStatus && <Navigate to={"/"} />}
         </div>
         <div className={classes.exitPage__shellButton}>
           <Button

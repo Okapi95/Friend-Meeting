@@ -49,29 +49,4 @@ const sendCreateMeetingRequest = async (
     });
 };
 
-// const sendCreateMeetingRequest = () => {
-//   internalRequestAxios
-//     .post("/meetings", {
-//       name: meetingName,
-//       description: meetingDescription,
-//       meetingLink: meetingZoomlink,
-//       dates: toRequiredFormatDate(
-//         chosenDate[0],
-//         chosenDate[1],
-//         chosenTime[0],
-//         chosenTime[1]
-//       ),
-//     })
-//     .then((response) => {
-//       console.log(
-//         `встреча создалась, вот такой response пришёл: ---> ${response}`
-//       );
-//       setIsRoomCreated(true);
-//     })
-//     .catch((error) => {
-//       console.log(
-//         `встреча НЕ создалась, вот такой error пришёл: ---> ${error}`
-//       );
-//     });
-// };
 export { toRequiredFormatDate, sendCreateMeetingRequest };
