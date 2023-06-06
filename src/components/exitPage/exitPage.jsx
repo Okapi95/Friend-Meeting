@@ -14,6 +14,7 @@ function ExitPage() {
   const { changeAuthStatusToFalse } = authorizationSlice.actions;
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.authStatus);
+
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 

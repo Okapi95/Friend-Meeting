@@ -11,17 +11,6 @@ import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
 
 function PersonalPage() {
   const [meetings, setMeetings] = useState([]);
-  // const sendMeetingsRequest = () => {
-  //   internalRequestAxios
-  //     .get("/meetings")
-  //     .then((response) => {
-  //       return response.data.content;
-  //     })
-  //     .then((array) => {
-  //       console.log("ошибка в запросе на встречи");
-  //       setMeetings(array);
-  //     });
-  // };
 
   useEffect(() => {
     internalRequestAxios
@@ -30,8 +19,6 @@ function PersonalPage() {
         return response.data.content;
       })
       .then((array) => {
-        // let newArray = [[], ...array];
-        // console.log("это новый" + newArray);
         console.log(array);
         setMeetings(array);
       })
