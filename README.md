@@ -8,4 +8,9 @@
 
 Прилагаю скриншоты приложения:
 
-![Screenshot_1](https://github.com/Okapi95/Friend-Meeting/raw/main/screenshots/image.png)
+<img src="screenshots/screenshot_1.png"/>
+<img src="screenshots/screenshot_2.png"/>
+<img src="screenshots/screenshot_3.png"/>
+<img src="screenshots/screenshot_4.png"/>
+<img src="screenshots/screenshot_5.png"/>
+<img src="screenshots/screenshot_6.png"/>
