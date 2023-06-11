@@ -7,7 +7,7 @@ import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 
 import { Link } from "react-router-dom";
 import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
-import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+import { internalRequestAxios } from "../../API-request/internalRequestAxios";
 
 function PersonalPage() {
   const [meetings, setMeetings] = useState([]);

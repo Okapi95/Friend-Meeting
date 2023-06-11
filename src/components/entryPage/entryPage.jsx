@@ -9,7 +9,7 @@ import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
 
-import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+import { internalRequestAxios } from "../../API-request/internalRequestAxios";
 
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

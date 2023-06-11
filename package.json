@@ -45,7 +45,9 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@redux-devtools/core": "^3.13.1"
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }

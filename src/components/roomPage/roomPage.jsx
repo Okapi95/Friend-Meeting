@@ -63,6 +63,7 @@ function RoomPage() {
       `по итогу клика на создание комнаты такое сейчас состояние:  ${authStatus}`
     );
   };
+
   return (
     <div className={classes.roomPage}>
       <div className={classes.roomPage__headline}>

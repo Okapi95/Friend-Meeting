@@ -29,16 +29,16 @@ function App() {
       if (await controlAuthorization()) {
         dispatch(changeAuthStatusToTrue());
         console.log(
-          "true-условие срабтало в арр, состояние должно было поменяться на true"
+          "App: true-условие сработало, состояние должно было поменяться на true"
         );
       } else {
         dispatch(changeAuthStatusToFalse());
         console.log(
-          "провалилось в else, заничит толькователь не авторизован вообще, состояние должно быть false"
+          "App: провалилось в else, значит пользователь не авторизован вообще, состояние должно быть false"
         );
       }
     } catch (error) {
-      console.log("что-то совсем пошло не так");
+      console.log("App: что-то совсем пошло не так");
     }
   };
   changeStartingStateAuthorization();

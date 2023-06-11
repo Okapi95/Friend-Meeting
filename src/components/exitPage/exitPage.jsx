@@ -8,7 +8,7 @@ import { authorizationSlice } from "../../store/features/authorizationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+import { internalRequestAxios } from "../../API-request/internalRequestAxios";
 
 function ExitPage() {
   const { changeAuthStatusToFalse } = authorizationSlice.actions;

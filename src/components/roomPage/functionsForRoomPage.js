@@ -1,4 +1,4 @@
-import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+import { internalRequestAxios } from "../../API-request/internalRequestAxios";
 
 const toRequiredFormatDate = (fromDate, toDate, fromTime, toTime) => {
   let dateFrom;

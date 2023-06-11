@@ -1,4 +1,4 @@
-import { internalRequestAxios } from "./axiosConfigBaseURL";
+import { internalRequestAxios } from "./internalRequestAxios";
 
 const controlAuthorization = async () => {
   try {

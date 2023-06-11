@@ -10,7 +10,13 @@ import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
 
 import { Navigate } from "react-router-dom";
-import { internalRequestAxios } from "../../API-request/axiosConfigBaseURL";
+import {
+  emailHandler,
+  passwordHandler,
+  passwordRepeatHandler,
+  blurHandler,
+  sendRegisterRequest,
+} from "./functionsForLoginPage";
 
 function LoginPage() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -30,74 +36,6 @@ function LoginPage() {
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
 
-  const emailHandler = (event) => {
-    setRegisterEmail(event.target.value);
-    const re =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(String(event.target.value).toLowerCase())) {
-      setEmailError("Неправильная почта");
-    } else {
-      setEmailError("");
-    }
-  };
-
-  const passwordHandler = (event) => {
-    setRegisterPassword(event.target.value);
-    const re = /^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9]).{6,}$/i;
-    if (!re.test(String(event.target.value))) {
-      setPasswordError(
-        "Пароль должен содержать минимум 6 латинских символов, минимум одну цифру, минимум одну букву в большом и малом регистре"
-      );
-    } else {
-      setPasswordError("");
-    }
-  };
-
-  const passwordRepeatHandler = (event) => {
-    setRegisterPasswordRepeat(event.target.value);
-    if (event.target.value === registerPassword) {
-      setPasswordRepeatError("");
-    } else {
-      setPasswordRepeatError("Пароль не совпадает");
-    }
-  };
-
-  const blurHandler = (event) => {
-    switch (event.target.name) {
-      case "email":
-        setEmailDirty(true);
-        break;
-      case "password":
-        setPasswordDirty(true);
-        break;
-      case "passwordRepeat":
-        setPasswordRepeatDirty(true);
-        break;
-    }
-  };
-  const sendRegisterRequest = () => {
-    internalRequestAxios
-      .post("/auth/register", {
-        email: registerEmail,
-        password: registerPassword,
-        confirmPassword: registerPasswordRepeat,
-      })
-      .then((response) => {
-        console.log(response);
-        setIsRegistered(true);
-      })
-      .catch((error) => {
-        console.log(error);
-        const errorMessage = error.response.data._embedded.errors[0].message;
-        if (errorMessage === "Пользователь с таким адресом уже существует") {
-          setEmailError("Пользователь с таким адресом уже существует");
-        } else if (errorMessage === "Пароль не удовлетворяет условиям") {
-          setPasswordError("Пароль не удовлетворяет условиям");
-        } else {
-          setPasswordRepeatError("Пароли не совпадают");
-        }
-      });
-  };
   return (
     <div>
       <div className={classes.loginPage}>
@@ -107,9 +45,18 @@ function LoginPage() {
           )}
           <Input
             value={registerEmail}
-            onChange={(event) => emailHandler(event)}
+            onChange={(event) =>
+              emailHandler(event, setRegisterEmail, setEmailError)
+            }
             name="email"
-            onBlur={(event) => blurHandler(event)}
+            onBlur={(event) =>
+              blurHandler(
+                event,
+                setEmailDirty,
+                setPasswordDirty,
+                setPasswordRepeatDirty
+              )
+            }
             type="email"
             placeHolder="Ваш Email"
             required={true}
@@ -121,9 +68,18 @@ function LoginPage() {
           <div className={classes.loginPage__password}>
             <Input
               value={registerPassword}
-              onChange={(event) => passwordHandler(event)}
+              onChange={(event) =>
+                passwordHandler(event, setRegisterPassword, setPasswordError)
+              }
               name="password"
-              onBlur={(event) => blurHandler(event)}
+              onBlur={(event) =>
+                blurHandler(
+                  event,
+                  setEmailDirty,
+                  setPasswordDirty,
+                  setPasswordRepeatDirty
+                )
+              }
               type={isVisiblePassword ? "text" : "password"}
               placeHolder="Введите пароль"
               required={true}
@@ -149,10 +105,24 @@ function LoginPage() {
             <SimpleTextBlock>{passwordRepeatError}</SimpleTextBlock>
           )}
           <Input
-            onChange={(event) => passwordRepeatHandler(event)}
+            onChange={(event) =>
+              passwordRepeatHandler(
+                event,
+                setRegisterPasswordRepeat,
+                setPasswordRepeatError,
+                registerPassword
+              )
+            }
             value={registerPasswordRepeat}
             name="passwordRepeat"
-            onBlur={(event) => blurHandler(event)}
+            onBlur={(event) =>
+              blurHandler(
+                event,
+                setEmailDirty,
+                setPasswordDirty,
+                setPasswordRepeatDirty
+              )
+            }
             type="password"
             placeHolder="Повторите пароль"
             required={true}
@@ -162,7 +132,17 @@ function LoginPage() {
         <div className={classes.buttonShellCheckin}>
           <Button
             styleButton={classes.button_theme_rich}
-            onClick={() => sendRegisterRequest()}
+            onClick={() =>
+              sendRegisterRequest(
+                registerEmail,
+                registerPassword,
+                registerPasswordRepeat,
+                setIsRegistered,
+                setEmailError,
+                setPasswordError,
+                setPasswordRepeatError
+              )
+            }
           >
             Зарегистрироваться
           </Button>
