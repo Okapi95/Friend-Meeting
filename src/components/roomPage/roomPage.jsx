@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./roomPage.module.less";
 
 import Form from "../usefulElements/usefulElements__form/usefulElements__form";
@@ -7,63 +7,23 @@ import Button from "../usefulElements/button/button";
 import NotificationTemplate from "../usefulElements/usefulElements__notificationTemplate/usefulElements__notificationTemplate";
 import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 
-import {
-  toRequiredFormatDate,
-  sendCreateMeetingRequest,
-} from "./functionsForRoomPage";
-import { controlAuthorization } from "../../API-request/controlAuthorization";
-
-import { authorizationSlice } from "../../store/features/authorizationSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-
-// библиотека Rsuite для выбора даты и времени
 import { DateRangePicker } from "rsuite";
-import "rsuite/styles/index.less";
-import "./customDateRangePicker.module.less";
 
-function RoomPage() {
-  const [meetingName, setMeetingName] = useState("");
-  const [meetingDescription, setMeetingDescription] = useState("");
-  const [meetingZoomlink, setMeetingZoomlink] = useState("");
-
-  const [chosenDate, setСhosenDate] = useState([new Date(), new Date()]);
-  const [chosenTime, setСhosenTime] = useState([new Date(), new Date()]);
-  const [isRoomCreated, setIsRoomCreated] = useState(false);
-
-  const { changeAuthStatusToFalse } = authorizationSlice.actions;
-  const dispatch = useDispatch();
-  const authStatus = useSelector((state) => state.authStatus);
-
-  const creationMeetingHandler = async () => {
-    let isStatusAuthorization = await controlAuthorization();
-    console.log(`сначала было такое состояние:  ${authStatus}`);
-    console.log(
-      `вот что в начале записалось в переменную errorAuthorization:  ${isStatusAuthorization}`
-    );
-    if (!isStatusAuthorization) {
-      dispatch(changeAuthStatusToFalse());
-      console.log(
-        `сработало условие if, так как в переменную записалось значение ${isStatusAuthorization}, должен задиспачиться экшен со сменой состояния на false`
-      );
-    }
-    await sendCreateMeetingRequest(
-      meetingName,
-      meetingDescription,
-      meetingZoomlink,
-      setIsRoomCreated,
-      toRequiredFormatDate(
-        chosenDate[0],
-        chosenDate[1],
-        chosenTime[0],
-        chosenTime[1]
-      )
-    );
-    console.log(
-      `по итогу клика на создание комнаты такое сейчас состояние:  ${authStatus}`
-    );
-  };
-
+function RoomPage({
+  setMeetingName,
+  setMeetingDescription,
+  setMeetingZoomlink,
+  setСhosenDate,
+  setСhosenTime,
+  creationMeetingHandler,
+  meetingName,
+  meetingDescription,
+  meetingZoomlink,
+  isRoomCreated,
+  chosenDate,
+  chosenTime,
+}) {
   return (
     <div className={classes.roomPage}>
       <div className={classes.roomPage__headline}>
@@ -145,4 +105,5 @@ function RoomPage() {
     </div>
   );
 }
+
 export default RoomPage;

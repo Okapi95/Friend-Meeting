@@ -1,4 +1,4 @@
-import { internalRequestAxios } from "../../API-request/internalRequestAxios";
+import { internalRequestAxios } from "../../../API-request/internalRequestAxios";
 
 const emailHandler = (event, setRegisterEmail, setEmailError) => {
   setRegisterEmail(event.target.value);
@@ -13,7 +13,7 @@ const emailHandler = (event, setRegisterEmail, setEmailError) => {
 
 const passwordHandler = (event, setRegisterPassword, setPasswordError) => {
   setRegisterPassword(event.target.value);
-  const re = /^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9]).{6,}$/i;
+  const re = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g; // /^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9]).{6,}$/i;
   if (!re.test(String(event.target.value))) {
     setPasswordError(
       "Пароль должен содержать минимум 6 латинских символов, минимум одну цифру, минимум одну букву в большом и малом регистре"
@@ -65,27 +65,23 @@ const sendRegisterRequest = async (
   setPasswordError,
   setPasswordRepeatError
 ) => {
-  internalRequestAxios
-    .post("/auth/register", {
+  try {
+    await internalRequestAxios.post("/auth/register", {
       email: registerEmail,
       password: registerPassword,
       confirmPassword: registerPasswordRepeat,
-    })
-    .then((response) => {
-      console.log(response);
-      setIsRegistered(true);
-    })
-    .catch((error) => {
-      console.log(error);
-      const errorMessage = error.response.data._embedded.errors[0].message;
-      if (errorMessage === "Пользователь с таким адресом уже существует") {
-        setEmailError("Пользователь с таким адресом уже существует");
-      } else if (errorMessage === "Пароль не удовлетворяет условиям") {
-        setPasswordError("Пароль не удовлетворяет условиям");
-      } else {
-        setPasswordRepeatError("Пароли не совпадают");
-      }
     });
+    setIsRegistered(true);
+  } catch (error) {
+    const errorMessage = error.response.data._embedded.errors[0].message;
+    if (errorMessage === "Пользователь с таким адресом уже существует") {
+      setEmailError("Пользователь с таким адресом уже существует");
+    } else if (errorMessage === "Пароль не удовлетворяет условиям") {
+      setPasswordError("Пароль не удовлетворяет условиям");
+    } else {
+      setPasswordRepeatError("Пароли не совпадают");
+    }
+  }
 };
 
 export {

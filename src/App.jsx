@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./App.module.less";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 
 import ErrorPage from "./components/errorPage/errorPage";
-import LoginPage from "./components/login-page/loginPage";
+import LoginPageContainer from "./components/loginPage/loginPageСontainer";
 import InfoAboutProject from "./components/mainInfo/infoAboutProject";
-import AfterRegistration from "./components/login-page/login-page__afterRegistration/login-page__afterRegistration";
-import RoomPage from "./components/roomPage/roomPage";
-import PersonalPage from "./components/personalPage/personalPage";
+import AfterRegistration from "./components/loginPage/loginPage__afterRegistration/loginPage__afterRegistration";
+import RoomPageContainer from "./components/roomPage/roomPageContainer";
+import PersonalPageContainer from "./components/personalPage/personalPageContainer";
 import InviteLinks from "./components/roomPage/roomPage__inviteLinks/roomPage__inviteLinks";
-import EntryPage from "./components/entryPage/entryPage";
-import ExitPage from "./components/exitPage/exitPage";
+import EntryPageContainer from "./components/entryPage/entryPageContainer";
+import ExitPageContainer from "./components/exitPage/exitPageContainer";
 
 import { useDispatch } from "react-redux";
 import { controlAuthorization } from "./API-request/controlAuthorization";
@@ -49,13 +49,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<InfoAboutProject />} />
-            <Route path="registration" element={<LoginPage />} />
+            <Route path="registration" element={<LoginPageContainer />} />
             <Route path="user-has-registered" element={<AfterRegistration />} />
-            <Route path="personal-page" element={<PersonalPage />} />
-            <Route path="create-room" element={<RoomPage />} />
+            <Route path="personal-page" element={<PersonalPageContainer />} />
+            <Route path="create-room" element={<RoomPageContainer />} />
             <Route path="created-room" element={<InviteLinks />} />
-            <Route path="entry" element={<EntryPage />} />
-            <Route path="exit-page" element={<ExitPage />} />
+            <Route path="entry" element={<EntryPageContainer />} />
+            <Route path="exit-page" element={<ExitPageContainer />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

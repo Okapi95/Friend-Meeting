@@ -13,10 +13,7 @@ function InviteLinks(props) {
       <div className={classes.inviteLinks__container}>
         <NotificationTemplate text={text} />
         <div className={classes.inviteLinks__buttonShell}>
-          <Button
-            styleButton={classes.button_theme_rich}
-            // onClick={}
-          >
+          <Button styleButton={classes.button_theme_rich}>
             Копировать ссылку-приглашение
           </Button>
         </div>

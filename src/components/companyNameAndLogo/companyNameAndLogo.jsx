@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import classes from "./companyNameAndLogo.module.less";
 
-import svg from "../../images/logo.svg";
+import logosvg from "../../images/logo.svg";
 
 import { Link } from "react-router-dom";
 
@@ -21,8 +21,8 @@ function CompanyNameAndLogo(props) {
     <Link className={classes.nameAndLogo} to="">
       <img
         className={classnames(classes.nameAndLogo__logo, imgSizeClass)}
-        src={svg}
-        alt="logo"
+        src={logosvg}
+        alt="logotype"
       />
       <div className={classnames(classes.nameAndLogo__name, nameSizeClass)}>
         Meet(Room)

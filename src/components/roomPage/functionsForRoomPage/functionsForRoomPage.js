@@ -1,4 +1,4 @@
-import { internalRequestAxios } from "../../API-request/internalRequestAxios";
+import { internalRequestAxios } from "../../../API-request/internalRequestAxios";
 
 const toRequiredFormatDate = (fromDate, toDate, fromTime, toTime) => {
   let dateFrom;
@@ -20,14 +20,14 @@ const toRequiredFormatDate = (fromDate, toDate, fromTime, toTime) => {
   return [{ from: dateFrom, to: dateTo }];
 };
 
-const sendCreateMeetingRequest = async (
+const sendCreateMeetingRequest = (
   meetingName,
   meetingDescription,
   meetingZoomlink,
   changeStateIsRoomCreated,
   toRequiredFormatDate
 ) => {
-  await internalRequestAxios
+  internalRequestAxios
     .post("/meetings", {
       name: meetingName,
       description: meetingDescription,

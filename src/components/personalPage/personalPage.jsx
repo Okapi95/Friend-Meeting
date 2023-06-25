@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./personalPage.module.less";
 
 import Button from "../usefulElements/button/button";
@@ -7,27 +7,8 @@ import Form from "../usefulElements/usefulElements__form/usefulElements__form";
 
 import { Link } from "react-router-dom";
 import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
-import { internalRequestAxios } from "../../API-request/internalRequestAxios";
 
-function PersonalPage() {
-  const [meetings, setMeetings] = useState([]);
-
-  useEffect(() => {
-    internalRequestAxios
-      .get("/meetings")
-      .then((response) => {
-        return response.data.content;
-      })
-      .then((array) => {
-        console.log(array);
-        setMeetings(array);
-      })
-      .catch(() => {
-        console.log("ошибка в запросе на встречи");
-      });
-  }, []);
-  console.log(meetings);
-
+function PersonalPage({ meetings }) {
   return (
     <div className={classes.personalPage}>
       <div className={classes.personalPage__headline}>
