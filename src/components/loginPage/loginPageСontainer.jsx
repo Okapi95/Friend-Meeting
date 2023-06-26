@@ -2,14 +2,6 @@ import React, { useState } from "react";
 
 import LoginPage from "./loginPage";
 
-import {
-  emailHandler,
-  passwordHandler,
-  passwordRepeatHandler,
-  blurHandler,
-  sendRegisterRequest,
-} from "./functionForLoginPage/functionsForLoginPage";
-
 function LoginPageСontainer() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -28,35 +20,46 @@ function LoginPageСontainer() {
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
 
+  const inputValueProps = {
+    registerEmail,
+    setRegisterEmail,
+    registerPassword,
+    setRegisterPassword,
+    registerPasswordRepeat,
+    setRegisterPasswordRepeat,
+  };
+  const allErrorProps = {
+    emailError,
+    setEmailError,
+    passwordError,
+    setPasswordError,
+    passwordRepeatError,
+    setPasswordRepeatError,
+  };
+  const dirtyProps = {
+    passwordDirty,
+    emailDirty,
+    setEmailDirty,
+    setPasswordDirty,
+    passwordRepeatDirty,
+    setPasswordRepeatDirty,
+  };
+  const visiblePasswordProps = {
+    isVisiblePassword,
+    setIsVisiblePassword,
+  };
+  const isRegisteredProps = {
+    setIsRegistered,
+    isRegistered,
+  };
+
   return (
     <LoginPage
-      emailHandler={emailHandler}
-      passwordHandler={passwordHandler}
-      passwordRepeatHandler={passwordRepeatHandler}
-      blurHandler={blurHandler}
-      sendRegisterRequest={sendRegisterRequest}
-      emailError={emailError}
-      setEmailError={setEmailError}
-      registerEmail={registerEmail}
-      setRegisterEmail={setRegisterEmail}
-      passwordDirty={passwordDirty}
-      emailDirty={emailDirty}
-      setEmailDirty={setEmailDirty}
-      setPasswordDirty={setPasswordDirty}
-      registerPassword={registerPassword}
-      setRegisterPassword={setRegisterPassword}
-      passwordError={passwordError}
-      setPasswordError={setPasswordError}
-      passwordRepeatDirty={passwordRepeatDirty}
-      passwordRepeatError={passwordRepeatError}
-      setPasswordRepeatDirty={setPasswordRepeatDirty}
-      isVisiblePassword={isVisiblePassword}
-      setIsVisiblePassword={setIsVisiblePassword}
-      setRegisterPasswordRepeat={setRegisterPasswordRepeat}
-      setPasswordRepeatError={setPasswordRepeatError}
-      registerPasswordRepeat={registerPasswordRepeat}
-      setIsRegistered={setIsRegistered}
-      isRegistered={isRegistered}
+      inputValueProps={inputValueProps}
+      allErrorProps={allErrorProps}
+      dirtyProps={dirtyProps}
+      visiblePasswordProps={visiblePasswordProps}
+      isRegisteredProps={isRegisteredProps}
     />
   );
 }

@@ -10,55 +10,44 @@ import SimpleTextBlock from "../usefulElements/simpleTextBlock/simpleTextBlock";
 import svghideeye from "../../images/iconhideeye.svg";
 import svgopeneye from "../../images/iconopeneye.svg";
 
-function LoginPage({
+import {
   emailHandler,
   passwordHandler,
   passwordRepeatHandler,
   blurHandler,
-  sendRegisterRequest,
+} from "./functionForLoginPage/functionsForLoginPage";
 
-  emailError,
-  setEmailError,
-  registerEmail,
-  setRegisterEmail,
-  passwordDirty,
-  emailDirty,
-  setEmailDirty,
-  setPasswordDirty,
+import { sendRegisterRequest } from "../../API-request/sendRegisterRequest";
 
-  registerPassword,
-  setRegisterPassword,
-  passwordError,
-  setPasswordError,
-  passwordRepeatDirty,
-  passwordRepeatError,
-  setPasswordRepeatDirty,
-  isVisiblePassword,
-  setIsVisiblePassword,
-  setRegisterPasswordRepeat,
-  setPasswordRepeatError,
-  registerPasswordRepeat,
-  setIsRegistered,
-  isRegistered,
+function LoginPage({
+  inputValueProps,
+  allErrorProps,
+  dirtyProps,
+  visiblePasswordProps,
+  isRegisteredProps,
 }) {
   return (
     <div className={classes.loginPage}>
       <Form headline="Регистрация">
-        {emailDirty && emailError && (
-          <SimpleTextBlock>{emailError}</SimpleTextBlock>
+        {dirtyProps.emailDirty && allErrorProps.emailError && (
+          <SimpleTextBlock>{allErrorProps.emailError}</SimpleTextBlock>
         )}
         <Input
-          value={registerEmail}
+          value={inputValueProps.registerEmail}
           onChange={(event) =>
-            emailHandler(event, setRegisterEmail, setEmailError)
+            emailHandler(
+              event,
+              inputValueProps.setRegisterEmail,
+              allErrorProps.setEmailError
+            )
           }
           name="email"
           onBlur={(event) =>
             blurHandler(
               event,
-              setEmailDirty,
-              setPasswordDirty,
-              setPasswordRepeatDirty
+              dirtyProps.setEmailDirty,
+              dirtyProps.setPasswordDirty,
+              dirtyProps.setPasswordRepeatDirty
             )
           }
           type="email"
@@ -66,25 +55,29 @@ function LoginPage({
           required={true}
           autofocus={false}
         />
-        {passwordDirty && passwordError && (
-          <SimpleTextBlock>{passwordError}</SimpleTextBlock>
+        {dirtyProps.passwordDirty && allErrorProps.passwordError && (
+          <SimpleTextBlock>{allErrorProps.passwordError}</SimpleTextBlock>
         )}
         <div className={classes.loginPage__password}>
           <Input
-            value={registerPassword}
+            value={inputValueProps.registerPassword}
             onChange={(event) =>
-              passwordHandler(event, setRegisterPassword, setPasswordError)
+              passwordHandler(
+                event,
+                inputValueProps.setRegisterPassword,
+                allErrorProps.setPasswordError
+              )
             }
             name="password"
             onBlur={(event) =>
               blurHandler(
                 event,
-                setEmailDirty,
-                setPasswordDirty,
-                setPasswordRepeatDirty
+                dirtyProps.setEmailDirty,
+                dirtyProps.setPasswordDirty,
+                dirtyProps.setPasswordRepeatDirty
               )
             }
-            type={isVisiblePassword ? "text" : "password"}
+            type={visiblePasswordProps.isVisiblePassword ? "text" : "password"}
             placeHolder="Введите пароль"
             required={true}
             autofocus={false}
@@ -92,10 +85,12 @@ function LoginPage({
             <div
               className={classes.loginPage__visiblePassword}
               onClick={() =>
-                setIsVisiblePassword((isVisiblePassword) => !isVisiblePassword)
+                visiblePasswordProps.setIsVisiblePassword(
+                  (isVisiblePassword) => !isVisiblePassword
+                )
               }
             >
-              {isVisiblePassword ? (
+              {visiblePasswordProps.isVisiblePassword ? (
                 <img
                   src={svgopeneye}
                   alt="openeye"
@@ -114,26 +109,29 @@ function LoginPage({
             </div>
           </Input>
         </div>
-        {passwordRepeatDirty && passwordRepeatError && (
-          <SimpleTextBlock>{passwordRepeatError}</SimpleTextBlock>
-        )}
+        {dirtyProps.passwordRepeatDirty &&
+          allErrorProps.passwordRepeatError && (
+            <SimpleTextBlock>
+              {allErrorProps.passwordRepeatError}
+            </SimpleTextBlock>
+          )}
         <Input
           onChange={(event) =>
             passwordRepeatHandler(
               event,
-              setRegisterPasswordRepeat,
-              setPasswordRepeatError,
-              registerPassword
+              inputValueProps.setRegisterPasswordRepeat,
+              allErrorProps.setPasswordRepeatError,
+              inputValueProps.registerPassword
             )
           }
-          value={registerPasswordRepeat}
+          value={inputValueProps.registerPasswordRepeat}
           name="passwordRepeat"
           onBlur={(event) =>
             blurHandler(
               event,
-              setEmailDirty,
-              setPasswordDirty,
-              setPasswordRepeatDirty
+              dirtyProps.setEmailDirty,
+              dirtyProps.setPasswordDirty,
+              dirtyProps.setPasswordRepeatDirty
             )
           }
           type="password"
@@ -147,20 +145,22 @@ function LoginPage({
           styleButton={classes.button_theme_rich}
           onClick={() =>
             sendRegisterRequest(
-              registerEmail,
-              registerPassword,
-              registerPasswordRepeat,
-              setIsRegistered,
-              setEmailError,
-              setPasswordError,
-              setPasswordRepeatError
+              inputValueProps.registerEmail,
+              inputValueProps.registerPassword,
+              inputValueProps.registerPasswordRepeat,
+              isRegisteredProps.setIsRegistered,
+              allErrorProps.setEmailError,
+              allErrorProps.setPasswordError,
+              allErrorProps.setPasswordRepeatError
             )
           }
         >
           Зарегистрироваться
         </Button>
 
-        {isRegistered && <Navigate to="/user-has-registered" replace={true} />}
+        {isRegisteredProps.isRegistered && (
+          <Navigate to="/user-has-registered" replace={true} />
+        )}
       </div>
     </div>
   );

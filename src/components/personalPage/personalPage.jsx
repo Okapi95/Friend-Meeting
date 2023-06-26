@@ -21,7 +21,9 @@ function PersonalPage({ meetings }) {
         </Form>
         <Form headline="Предстоящие">
           {meetings.map((meetingName) => (
-            <SimpleTextBlock>{meetingName.description}</SimpleTextBlock>
+            <SimpleTextBlock key={meetingName.meetingId}>
+              {meetingName.description}
+            </SimpleTextBlock>
           ))}
         </Form>
       </div>

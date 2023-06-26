@@ -1,5 +1,3 @@
-import { internalRequestAxios } from "../../../API-request/internalRequestAxios";
-
 const emailHandler = (event, setRegisterEmail, setEmailError) => {
   setRegisterEmail(event.target.value);
   const re =
@@ -56,38 +54,4 @@ const blurHandler = (
   }
 };
 
-const sendRegisterRequest = async (
-  registerEmail,
-  registerPassword,
-  registerPasswordRepeat,
-  setIsRegistered,
-  setEmailError,
-  setPasswordError,
-  setPasswordRepeatError
-) => {
-  try {
-    await internalRequestAxios.post("/auth/register", {
-      email: registerEmail,
-      password: registerPassword,
-      confirmPassword: registerPasswordRepeat,
-    });
-    setIsRegistered(true);
-  } catch (error) {
-    const errorMessage = error.response.data._embedded.errors[0].message;
-    if (errorMessage === "Пользователь с таким адресом уже существует") {
-      setEmailError("Пользователь с таким адресом уже существует");
-    } else if (errorMessage === "Пароль не удовлетворяет условиям") {
-      setPasswordError("Пароль не удовлетворяет условиям");
-    } else {
-      setPasswordRepeatError("Пароли не совпадают");
-    }
-  }
-};
-
-export {
-  emailHandler,
-  passwordHandler,
-  passwordRepeatHandler,
-  blurHandler,
-  sendRegisterRequest,
-};
+export { emailHandler, passwordHandler, passwordRepeatHandler, blurHandler };

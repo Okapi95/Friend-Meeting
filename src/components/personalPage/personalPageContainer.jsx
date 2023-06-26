@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import PersonalPage from "./personalPage";
-import { internalRequestAxios } from "../../API-request/internalRequestAxios";
+import { sendMeetingsRequest } from "../../API-request/sendMeetingsRequest";
+import { controlAuthorization } from "../../API-request/controlAuthorization";
 
 function PersonalPageContainer() {
   const [meetings, setMeetings] = useState([]);
-
   useEffect(() => {
-    internalRequestAxios
-      .get("/meetings")
-      .then((response) => {
-        return response.data.content;
-      })
-      .then((array) => {
-        console.log(array);
-        setMeetings(array);
-      })
-      .catch(() => {
-        console.log("ошибка в запросе на встречи");
-      });
+    controlAuthorization().then(() => {
+      sendMeetingsRequest(setMeetings);
+    });
   }, []);
   console.log(meetings);
 
